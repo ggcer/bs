@@ -1,0 +1,101 @@
+/*----------------------------muse-ui样式重写----------------------------*/
+
+
+/*输入框placeholder对其方式*/
+
+.mu-text-field-hint {
+	text-align: left!important;
+}
+
+
+/*full width按钮上下边距*/
+
+.mu-raised-button-full {
+	margin-top: 10px!important;
+	margin-bottom: 10px!important;
+}
+
+/*下拉框*/
+.mu-popover{
+	border-radius: 0!important;
+	background-color: rgba(255, 255, 255, 0.9)!important;
+}
+.mu-dropDown-menu-text-overflow{
+	text-align: left;
+	color: rgba(255, 255, 255, 0.6)!important;
+}
+.mu-menu-item-wrapper.active{
+	color: rgb(33, 150, 243)!important;
+}
+
+/*下弹出框*/
+
+.mu-bottom-sheet {
+	background-color: rgba(255, 255, 255, 0.9)!important;
+}
+
+
+/*加载框*/
+
+.mu-circular-progress {
+	position: fixed!important;
+	top: calc(50% - 20px)!important;
+	left: calc(50% - 20px)!important;
+}
+
+
+/*输入框*/
+
+.mu-text-field-hint {
+	color: rgba(255, 255, 255, 0.6)!important;
+}
+
+.mu-text-field-line {
+	background-color: rgba(255, 255, 255, 0.6)!important;
+}
+
+.mu-text-field-input {
+	color: white!important;
+}
+
+
+/*消息提示框*/
+
+.mu-toast {
+	z-index: 99999999!important;
+	width: 100%!important;
+	border-radius: 0!important;
+	bottom: 0!important;
+	background-color: rgba(0, 0, 0, 0.5)!important;
+	text-align: center!important;
+	height: 35px!important;
+	line-height: 35px!important;
+	letter-spacing: 2px;
+}
+
+.mu-item-title{
+	white-space: nowrap!important;
+	overflow: hidden!important;
+	text-overflow: ellipsis!important;
+}
+
+
+/*----------------------------其他有关muse-ui的样式----------------------------*/
+
+
+/*消息警告框*/
+
+.warn-toast {
+	background-color: rgba(255, 51, 51, 0.6)!important;
+}
+
+.success-toast {
+	background-color: rgba(164, 219, 0, 0.6)!important;
+}
+
+
+/*标题加载框[userInfo页]*/
+
+.title-mu-circle-wrapper {
+	margin-top: 15px!important;
+}

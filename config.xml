@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.demo" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>微校社团</name>
+    <description>
+    	微校社团demo
+    </description>
+    <author email="897674352@qq.com" href="http://cordova.io">
+    	897674352@qq.com
+    </author>
+    <content src="index.html" />
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <platform name="android">
+        <allow-intent href="market:*" />
+        <icon density="ldpi" src="res/icon/android/icon.png" />
+        <icon density="mdpi" src="res/icon/android/icon.png" />
+        <icon density="hdpi" src="res/icon/android/icon.png" />
+        <icon density="xhdpi" src="res/icon/android/icon.png" />
+        <icon density="xxhdpi" src="res/icon/android/icon.png" />
+        <icon density="xxxhdpi" src="res/icon/android/icon.png" />
+        <splash density="land-hdpi" src="res/screen/android/screen.png" />
+        <splash density="land-ldpi" src="res/screen/android/screen.png" />
+        <splash density="land-mdpi" src="res/screen/android/screen.png" />
+        <splash density="land-xhdpi" src="res/screen/android/screen.png" />
+        <splash density="port-hdpi" src="res/screen/android/screen.png" />
+        <splash density="port-ldpi" src="res/screen/android/screen.png" />
+        <splash density="port-mdpi" src="res/screen/android/screen.png" />
+        <splash density="port-xhdpi" src="res/screen/android/screen.png" />
+    </platform>
+    <platform name="ios">
+        <allow-intent href="itms:*" />
+        <allow-intent href="itms-apps:*" />
+    </platform>
+    <preference name="SplashScreenDelay" value="10000" />
+    <preference name="AutoHideSplashScreen" value="false" />
+    <preference name="ShowSplashScreenSpinner" value="false" />
+    <engine name="android" spec="^6.4.0" />
+    <engine name="ios" spec="~4.5.4" />
+    <plugin name="cordova-plugin-background-mode" spec="^0.7.2" />
+    <plugin name="cordova-plugin-camera" spec="^4.0.1" />
+    <plugin name="cordova-plugin-splashscreen" spec="^5.0.1" />
+    <plugin name="cordova-plugin-statusbar" spec="^2.4.1" />
+    <plugin name="cordova-sqlite-storage" spec="^2.1.5" />
+    <plugin name="phonegap-plugin-barcodescanner" spec="^7.0.0">
+        <variable name="CAMERA_USAGE_DESCRIPTION" value=" " />
+    </plugin>
+    <plugin name="cordova-plugin-whitelist" spec="1" />
+    <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
+    <plugin name="cordova-plugin-alipay-v2" spec="0.0.4">
+        <variable name="APP_ID" value="2016080600177461" />
+    </plugin>
+    <plugin name="cordova-plugin-baidumaplocation" spec="^3.2.0">
+        <variable name="ANDROID_KEY" value="3IYf8CExg3Qf6xxZeCT7ybGDib55Dw9d" />
+        <variable name="IOS_KEY" value="OIlX6M6Pvf7k0Z8sUHLkGf7WYaje2Yfc" />
+        <variable name="IOS_LOCATION_DESC" value="请点击'好'以允许访问。" />
+    </plugin>
+    <plugin name="jpush-phonegap-plugin" spec="^3.3.0">
+        <variable name="APP_KEY" value="fbfaef04a0930b9075126e9a" />
+    </plugin>
+</widget>

@@ -1,0 +1,267 @@
+/*----------------------------基本css----------------------------*/
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+::-webkit-scrollbar {
+	display: none
+}
+
+html,
+body {
+	width: 100%;
+	overflow-x: hidden;
+}
+
+#app {
+	width: 100%;
+	background-color: #F4F4F4;
+	font-family: 'Avenir', Helvetica, Arial, sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+/*----------------------------其他全局css----------------------------*/
+
+
+/*loading模态层*/
+
+.loading-wrap {
+	position: fixed;
+	z-index: 9999;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	top: 0;
+	background-color: rgba(0, 0, 0, 0.2);
+}
+
+
+/*trans相关*/
+
+.trans {
+	transition: all 0.5s!important;
+}
+
+.only-trans-bg-color {
+	transition: background-color 0.5s!important;
+}
+
+.only-trans-height {
+	transition: height 0.5s!important;
+}
+
+.only-trans-padding-top {
+	transition: padding-top 0.5s!important;
+}
+
+.no-trans {
+	transition: none!important;
+}
+
+
+/*分割线*/
+
+.fgx {
+	width: 100%;
+	height: 5px;
+	padding: 0 15px;
+	margin-bottom: 20px;
+}
+
+
+/*无法滚动*/
+
+.overflowHidden {
+	overflow: hidden;
+}
+
+
+/*透明度为0*/
+
+.opacity0 {
+	opacity: 0;
+}
+
+
+/*picke重写相关*/
+
+.picker-title {
+	font-size: 15px!important;
+	font-weight: normal!important;
+	letter-spacing: 2px;
+}
+
+.confirm-hook {
+	color: #4AA1FF!important;
+}
+
+.wheel-item {
+	font-size: 18px!important;
+}
+
+/*颜色相关*/
+.blue-span {
+	color: #6A91FF!important;
+}
+
+/*----------------------------动画相关----------------------------*/
+
+
+/*从下往上淡入，从上往下淡出*/
+
+.bottomToTop-enter-active {
+	animation-name: bottomToTop-in;
+	animation-duration: 1s;
+}
+
+.bottomToTop-leave-active {
+	animation-name: bottomToTop-out;
+	animation-duration: 1s;
+}
+
+@keyframes bottomToTop-in {
+	0% {
+		transform: translate3d(0, 100%, 0);
+		opacity: 0
+	}
+	100% {
+		transform: translate3d(0, 0, 0);
+		opacity: 1
+	}
+}
+
+@keyframes bottomToTop-out {
+	0% {
+		transform: translate3d(0, 0, 0);
+		opacity: 1
+	}
+	100% {
+		transform: translate3d(0, 100%, 0);
+		opacity: 0
+	}
+}
+
+
+/*从左往右淡入，从右往左淡出*/
+
+.leftToRight-enter-active {
+	animation-name: leftToRight-in;
+	animation-duration: 1s;
+}
+.leftToRight-leave-active {
+	animation-name: leftToRight-out;
+	animation-duration: 1s;
+}
+
+.leftToRight05-enter-active {
+	animation-name: leftToRight-in;
+	animation-duration: 0.5s;
+}
+.leftToRight05-leave-active {
+	animation-name: leftToRight-out;
+	animation-duration: 0.5s;
+}
+
+@keyframes leftToRight-in {
+	0% {
+		transform: translate3d(-100%, 0, 0);
+		opacity: 0
+	}
+	100% {
+		transform: translate3d(0, 0, 0);
+		opacity: 1
+	}
+}
+
+@keyframes leftToRight-out {
+	0% {
+		transform: translate3d(0, 0, 0);
+		opacity: 1
+	}
+	100% {
+		transform: translate3d(-100%, 0, 0);
+		opacity: 0
+	}
+}
+
+.rightToLeft-enter-active {
+	animation-name: rightToLeft-in;
+	animation-duration: 1s;
+}
+.rightToLeft-leave-active {
+	animation-name: rightToLeft-out;
+	animation-duration: 1s;
+}
+
+.rightToLeft05-enter-active {
+	animation-name: rightToLeft-in;
+	animation-duration: 0.5s;
+}
+.rightToLeft05-leave-active {
+	animation-name: rightToLeft-out;
+	animation-duration: 0.5s;
+}
+
+@keyframes rightToLeft-in {
+	0% {
+		transform: translate3d(100%, 0, 0);
+		opacity: 0
+	}
+	100% {
+		transform: translate3d(0, 0, 0);
+		opacity: 1
+	}
+}
+
+@keyframes rightToLeft-out {
+	0% {
+		transform: translate3d(0, 0, 0);
+		opacity: 1
+	}
+	100% {
+		transform: translate3d(100%, 0, 0);
+		opacity: 0
+	}
+}
+
+/*淡入淡出*/
+
+.fadeIn-enter-active {
+	animation-name: fadeIn-in;
+	animation-duration: 1s;
+}
+
+.fadeIn-leave-active {
+	animation-name: fadeIn-out;
+	animation-duration: 1s;
+}
+.fadeIn05-enter-active {
+	animation-name: fadeIn-in;
+	animation-duration: 0.5s;
+}
+
+.fadeIn05-leave-active {
+	animation-name: fadeIn-out;
+	animation-duration: 0.5s;
+}
+
+@keyframes fadeIn-in {
+	0% {
+		opacity: 0
+	}
+	100% {
+		opacity: 1
+	}
+}
+
+@keyframes fadeIn-out {
+	0% {
+		opacity: 1
+	}
+	100% {
+		opacity: 0
+	}
+}
