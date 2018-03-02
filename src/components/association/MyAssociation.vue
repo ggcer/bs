@@ -5,10 +5,10 @@
 			<mu-icon-button icon="icon-fanhui" slot="left" @click="back"/>
 		</app-bar>
 		
-		<app-content slot="appContent" :needRefresh="true" :refreshMethod="refresh">
+		<app-content slot="appContent" :refreshMethod="refresh">
 			<div class="ma-search">
 				<img src="../../assets/image/icon/search.png" class="search-icon">
-				<input type="search" id="head-search" class="head-search" placeholder="从我的社团中搜索...">
+				<input type="search" id="head-search"v-model="searchKeyword" class="head-search" placeholder="从我的社团中搜索...">
 			</div>
 			<div class="sort-row">
 				<div class="sort-row-col">
@@ -50,14 +50,14 @@
 		  		</div>
 			</div>
 			<div class="common-item-wrap">
-				<div class="common-item" v-bind:class="{'common-item-laptop': !user.isMAGrid}" v-for="(item, index) in activeOrgList">
-					<img :src="item.orgImg" class="common-item-img" v-bind:class="{'common-item-img-laptop': !user.isMAGrid}">
+				<div class="common-item" v-bind:class="{'common-item-laptop': !user.isMAGrid}" v-for="(item, index) in myAssociationListWithSortAndFilterKeyword" @click="goToAssociationHome(item)">
+					<img :src="item.associationBgImg" class="common-item-img" v-bind:class="{'common-item-img-laptop': !user.isMAGrid}">
 					<div class="common-item-tip" v-bind:class="{'common-item-tip-laptop': !user.isMAGrid}">
 						<img src="../../assets/image/icon/fire.png" class="common-item-tip-icon" v-bind:class="{'common-item-tip-icon-laptop': !user.isMAGrid}"> {{item.hotCount}}
 						<img src="../../assets/image/icon/member.png" class="common-item-tip-icon" v-bind:class="{'common-item-tip-icon-laptop': !user.isMAGrid}" style="margin-left: 5px;"> {{item.orgMemberCount}}
 					</div>
-					<p class="common-item-desc">{{item.desc}}</p>
-					<p class="common-item-add-desc">{{item.addDesc}}</p>
+					<p class="common-item-desc" v-html="item.desc"></p>
+					<p class="common-item-add-desc" v-html="item.addDesc"></p>
 				</div>
 			</div>
 		</app-content>
@@ -70,37 +70,50 @@
 		data() {
 			return {
 				user: {},
-				activeOrgList: [{
-					orgImg: require('../../assets/image/swiper/swiper1.jpg'),
+				searchKeyword: '',
+				myAssociationList: [{
+					associationBgImg: require('../../assets/image/other/demoTemp/ymq.jpg'),
 					desc: '渤海大学羽毛球协会欢迎广大渤大的学生加入本社，共同交流技术',
 					addDesc: '羽毛球协会',
 					hotCount: 1290,
 					orgMemberCount: 51,
+					joinDate: '2018-01-21 18:56:43',	
+					
+					recentlyVisitedDate: '2018-02-08 00:00:08'
 				},{
-					orgImg: require('../../assets/image/swiper/swiper2.jpg'),
+					associationBgImg: require('../../assets/image/other/demoTemp/bwt.jpg'),
 					desc: '青春激情飞扬，没有极限...',
 					addDesc: '渤舞堂',
 					hotCount: 995,
 					orgMemberCount: 39,
+					joinDate: '2018-01-17 15:50:33',
+					
+					recentlyVisitedDate: '2018-02-03 08:30:38'
 				},{
-					orgImg: require('../../assets/image/swiper/swiper3.jpg'),
+					associationBgImg: require('../../assets/image/other/demoTemp/sfxh.jpg'),
 					desc: '以文会友，活动地址渤海大学图书馆，报名请加微信群',
 					addDesc: '书法协会',
 					hotCount: 723,
 					orgMemberCount: 102,
+					joinDate: '2018-01-20 14:22:31',
+					
+					recentlyVisitedDate: '2018-02-06 21:11:15'
 				},{
-					orgImg: require('../../assets/image/bg/user-bg.jpg'),
+					associationBgImg: require('../../assets/image/other/demoTemp/blxh.jpg'),
 					desc: '舌战群儒，毫无畏惧',
 					addDesc: '辩论协会',
 					hotCount: 1290,
 					orgMemberCount: 51,
+					joinDate: '2018-01-31 19:26:03',
+					
+					recentlyVisitedDate: '2018-02-06 11:31:52'
 				}],
 			}
 		},
 		methods: {
 			refresh() {
 				setTimeout(() => {
-					util.ui.hideAllLoading();
+					util.ui.hideLoading('TOP');
 				}, 2000)
 			},
 			sort(sortField) {
@@ -111,6 +124,56 @@
 				this.user.MASortField = sortField;
 				this.user.MASortType = '-';
 			},
+			goToAssociationHome(associationData){
+				this.goWithParams('associationHome', associationData);
+			}
+ 		},
+ 		computed: {
+ 			myAssociationListWithSortAndFilterKeyword: function() {
+ 				let temp = [];
+ 				let myAssociationListWithFilterKeyword = [];
+ 				//先根据关键字过滤数据
+ 				this.myAssociationList.forEach((item, index) => {
+ 					if(this.searchKeyword){
+ 						if(item.desc.indexOf(this.searchKeyword) != -1 || item.addDesc.indexOf(this.searchKeyword) != -1){
+	 						//浅拷贝对象(展示的list与实际list不同，展示的list中有可能带keyword高亮的部分)
+	 						let pushItem = util.common.shallowCopyObj(item);
+	 						//查找keyword匹配项
+	 						let descRegStr=this.searchKeyword;
+							let descReg =new RegExp(descRegStr, 'gim');
+							pushItem.desc = pushItem.desc.replace(descReg, '<span class="red-span">' + this.searchKeyword + '</span>');
+							
+	 						let addDescRegStr=this.searchKeyword;
+							let addDescReg =new RegExp(addDescRegStr, 'gim');
+							pushItem.addDesc = pushItem.addDesc.replace(addDescReg, '<span class="red-span">' + this.searchKeyword + '</span>');
+	 						myAssociationListWithFilterKeyword.push(pushItem);
+	 					}
+ 					}else{
+ 						myAssociationListWithFilterKeyword.push(item);
+ 					}
+ 				})
+				return temp.concat(myAssociationListWithFilterKeyword).sort((val1,val2) => {
+					let val1CompareValue;
+					let val2CompareValue;
+					if(this.user.MASortField == 'RECENTLY_VIEWED'){
+						val1CompareValue = util.common.formatDateStrToDateObj(val1.recentlyVisitedDate).getTime();
+						val2CompareValue = util.common.formatDateStrToDateObj(val2.recentlyVisitedDate).getTime();
+					}else if(this.user.MASortField == 'ACTIVENESS'){
+						val1CompareValue = val1.hotCount
+						val2CompareValue = val2.hotCount;
+					}else if(this.user.MASortField == 'JOIN_DATE'){
+						val1CompareValue = util.common.formatDateStrToDateObj(val1.joinDate).getTime();
+						val2CompareValue = util.common.formatDateStrToDateObj(val2.joinDate).getTime();
+					}
+					if(val1CompareValue > val2CompareValue){
+						return this.user.MASortType == '-' ? -1 : 1
+					}else if(val1CompareValue < val2CompareValue){
+						return this.user.MASortType == '-' ? 1 : -1 
+					}else{
+						return 0;
+					}
+				});
+ 			},
  		},
 		mounted() {
 			this.user = util.cache.get('user');

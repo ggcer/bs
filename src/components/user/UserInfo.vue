@@ -28,14 +28,14 @@
 				<mu-sub-header>我的社团</mu-sub-header>
 				<img src="../../assets/image/other/userInfo-fgx.png" class="fgx" />
 				<mu-grid-tile>
-					<img src="../../assets/image/dlrb.jpg" />
-					<span slot="title">篮球社</span>
+					<img src="../../assets/image/other/demoTemp/ymq.jpg" />
+					<span slot="title">羽毛球社</span>
 					<span slot="subTitle">from <b>渤海大学</b></span>
 					<mu-icon-button icon="person_add" slot="action" />
 				</mu-grid-tile>
 				<mu-grid-tile>
-					<img src="../../assets/image/dlrb.jpg" />
-					<span slot="title">羽毛球社</span>
+					<img src="../../assets/image/other/demoTemp/bwt.jpg" />
+					<span slot="title">书法协会</span>
 					<span slot="subTitle">from <b>渤海大学</b></span>
 					<mu-icon-button icon="person" slot="action" />
 				</mu-grid-tile>
@@ -105,8 +105,18 @@
 			this.user = util.cache.get('user');
 			let userBgImgCache = util.cache.get('userBgImg', true);
 			if(userBgImgCache){
-				this.user.userBgImg = userBgImgCache;
-				util.cache.set('user', this.user);
+				util.http.normalReq.post('/USER-CLIENT/user', {
+					userId: this.user.userId,
+					userBgImg: userBgImgCache
+				},
+				(data) => {
+					if(data.result){
+						this.user.userBgImg = userBgImgCache;
+						util.cache.set('user', this.user);
+					}
+				}, (err) => {
+					util.ui.toast(data.msg, 'WARN');
+				})
 			}
 			let user = this.user;
 			this.title = user.userName ? user.userName : '无名大侠';
@@ -119,10 +129,10 @@
 
 			let age = null;
 			if(user.userBirthday) {
-				let ymdArr = user.userBirthday.split('-');
-				let birthdayYear = parseInt(ymdArr[0]);
-				let birthdayMonth = parseInt(ymdArr[1]);
-				let birthdayDay = parseInt(ymdArr[2]);
+				let userBirthdayDateObj = new Date(user.userBirthday);
+				let birthdayYear = userBirthdayDateObj.getFullYear();
+				let birthdayMonth = userBirthdayDateObj.getMonth() + 1;
+				let birthdayDay = userBirthdayDateObj.getDate();
 
 				let nowDate = new Date();
 				let nowYear = nowDate.getFullYear();
@@ -134,15 +144,24 @@
 					age--;
 				}
 			}
-
+			
+			let userAddress = '';
+			if(user.userProvince){
+				userAddress = user.userProvince;
+			}
+			if(user.userProvince && user.userCity){
+				userAddress = user.userProvince + '-' + user.userCity;
+			}
+			
+			//拼接summaryMsg
 			if(userSexStr) {
 				this.summaryMsg += userSexStr + ' ';
 			}
 			if(age || age == 0) {
 				this.summaryMsg += age + '岁 ';
 			}
-			if(user.userAddress) {
-				this.summaryMsg += user.userAddress;
+			if(userAddress) {
+				this.summaryMsg += userAddress;
 			}
 			//下拉刷新事件注册
 			let startY = 0;
@@ -151,7 +170,7 @@
 			let userBgImg = $('#user-bg-img');
 			let bgImgWidth = userBgImg.width();
 			let bgImgHeight = 250;
-			$(window).on('touchmove', (e) => {
+			$(window).on('touchmove', (event) => {
 				let scrollTop = $('#app-wrap').scrollTop();
 				let touch = event.targetTouches[0];
 				beforeY = afterY;
@@ -173,16 +192,16 @@
 					userBgImg.css('backgroundSize', bgImgWidth + 'px ' + bgImgHeight + 'px');
 				}
 			});
-			$(window).on('touchstart', (e) => {
+			$(window).on('touchstart', (event) => {
 				let touch = event.targetTouches[0];
 				startY = touch.pageY;
 				userBgImg.removeClass('trans');
 				beforeY = 0;
-				afterY = 0;
+				afterY = startY;
 				bgImgWidth = userBgImg.width();
 				bgImgHeight = 250;
 			});
-			$(window).on('touchend', (e) => {
+			$(window).on('touchend', (event) => {
 				//设置最小触发高度并且防止重复刷新
 				if(userBgImg.height() > 300 && this.title.indexOf('mu-circle-wrapper') == -1) {
 					this.title = '' +
@@ -219,7 +238,7 @@
 	}
 	
 	.app-content {
-		top: -70px;
+		margin-top: -70px;
 	}
 	
 	.user-bg-img {
@@ -239,7 +258,7 @@
 		width: 80px;
 		height: 80px;
 		border-radius: 50%;
-		box-shadow: 0 0 0 2px white;
+		box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5);
 	}
 	
 	.user-base-msg h4 {
@@ -252,7 +271,8 @@
 		text-overflow: ellipsis;
 		overflow: hidden;
 		margin-top: 5px;
-		font-weight: bold;
+		font-weight: normal;
+		text-align: center;
 	}
 	
 	.user-base-msg p {
@@ -268,6 +288,7 @@
 		text-overflow: ellipsis;
 		overflow: hidden;
 		color: #757575;
+		text-align: center;
 	}
 	
 	.mu-sub-header {

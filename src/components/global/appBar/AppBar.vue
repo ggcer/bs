@@ -13,7 +13,7 @@
 				<slot name="right"></slot>
 			</div>
 		</div>
-		<div class="runner-wrap" v-if="loading.isShowHeadLoading">
+		<div class="runner-wrap" v-show="loading.isShowTopLoading">
 			<div class='kai animate' id='running' :style="{backgroundImage: 'url(' + runnerImgSrc + ')'}">
 			</div>
 		</div>

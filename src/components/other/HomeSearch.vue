@@ -173,11 +173,11 @@
 				this.searchResultList = [];
 				
 				$('#loading-wrap').css('top', 109);
-				util.ui.showLoading();
+				util.ui.showLoading('CENTER');
 				this.switchActiveSRHIAbled = false;
 				this.isNoRecord = false;
 				setTimeout(() => {
-					util.ui.hideAllLoading();
+					util.ui.hideLoading('CENTER');
 					this.switchActiveSRHIAbled = true;
 					$('#loading-wrap').css('top', 0);
 					if(index != 0){
@@ -215,7 +215,7 @@
 			$('#head-search').width($(window).width() - 150);
 			$('#head-search').focus();
 			$('#head-search').focus(() => {
-				util.ui.hideAllLoading();
+				util.ui.hideLoading('CENTER');
 				this.isShowSearchResult = false;
 			})
 			$("#head-search").on('keypress',(e) => {  

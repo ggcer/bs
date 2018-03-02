@@ -8,7 +8,8 @@ const bo = {
 		userSex: null,					//用户性别	1:男 2:女
 		userPhone: null,				//用户手机
 		userBirthday: null,				//用户生日
-		userAddress: null,				//用户地址
+		userProvince: null,				//用户所在省份
+		userCity: null,					//用户所在城市
 		userSchool: null,				//用户所在大学
 		userEmail: null,				//用户邮箱
 		userInfo: null,					//用户个性签名

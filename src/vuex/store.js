@@ -40,8 +40,15 @@ export default new Vuex.Store({
 
 		//loading
 		loading: {
-			isShowHeadLoading: false,
+			isShowTopLoading: false,
 			isShowCenterLoading: false,
+			isShowBottomLoading: false,
+		},
+		
+		imgViewer: {
+			isShowImgViewer: false,
+			imgSrcList: [],
+			nowActiveIndex: 0
 		}
 	},
 	getters: {
@@ -50,6 +57,9 @@ export default new Vuex.Store({
 		},
 	    userSet: state => {
 	      return state.userSet;
+	    },
+	    imgViewer: state => {
+	    	return state.imgViewer;
 	    }
 	},
 	mutations: {
@@ -82,6 +92,11 @@ export default new Vuex.Store({
 		UPDATE_LOADING(state, payLoad) {
 			for(let key in payLoad){
 				state.loading[key] = payLoad[key];
+			}
+		},
+		UPDATE_IMGVIEWER(state, payLoad) {
+			for(let key in payLoad){
+				state.imgViewer[key] = payLoad[key];
 			}
 		},
 	}

@@ -328,7 +328,12 @@ document.addEventListener('deviceready', () => {
 			                }
 						}
 					}else{
-						router.back();
+						//当显示图片查看层时关闭图片查看层
+						if(store.getters.imgViewer.isShowImgViewer){
+							util.ui.hideImgViewer();
+						}else{
+							router.back();
+						}
 					}
 				}else{
 					console.log('监听返回按钮失败-不存在的backgroundMode对象');

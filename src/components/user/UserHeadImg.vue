@@ -46,9 +46,19 @@
 			let user = util.cache.get('user');
 			let userHeadImg = util.cache.get('userHeadImg', true);
 			if(userHeadImg){
-				this.userHeadImg = userHeadImg;
-				user.userHeadImg = userHeadImg;
-				util.cache.set('user', user);
+				util.http.normalReq.post('/USER-CLIENT/user', {
+					userId: user.userId,
+					userHeadImg: userHeadImg
+				},
+				(data) => {
+					if(data.result){
+						this.userHeadImg = userHeadImg;
+						user.userHeadImg = userHeadImg;
+						util.cache.set('user', user);
+					}else{
+						util.ui.toast(data.msg, 'WARN');
+					}
+				})
 			}else{
 				this.userHeadImg = user.userHeadImg;
 			}

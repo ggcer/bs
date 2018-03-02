@@ -127,12 +127,27 @@
 			},
 			saveUserEdit() {
 				this.user.userSex = this.sexObj.value;
-				this.user.userBirthday = this.birthdayStr;
-				this.user.userAddress = this.addressStr;
+				this.user.userBirthday = util.common.formatDateStrToTimestamp(this.birthdayStr);
+				this.user.userProvince = this.addressStr.split('-')[0];
+				this.user.userCity = this.addressStr.split('-')[1];
 				this.user.userSchool = this.collegeStr;
-				util.cache.set('user', this.user);
 				
-				this.back();
+				let requestUser = util.common.shallowCopyObj(this.user);
+				//此页面不保存涉及用户头像和用户背景图片的保存，为了防止流量浪费，不传入这两个参数
+				requestUser.userHeadImg = null;
+				requestUser.userBgImg = null;
+				//后台接收userBirthday的字段为userBirthdayVo
+				requestUser.userBirthdayVo = requestUser.userBirthday;
+				
+				util.http.normalReq.post('/USER-CLIENT/user', requestUser, 
+				(data) => {
+					if(data.result){
+						util.cache.set('user', this.user);
+						this.back();
+					}else{
+						util.ui.toast(data.msg, 'WARN');
+					}
+				})
 			},
 		},
 		mounted() {
@@ -152,15 +167,16 @@
 				}
 			}
 			if(user.userBirthday){
-				let ymdArr = user.userBirthday.split('-');
-				this.birthdayObj.year = ymdArr[0];
-				this.birthdayObj.month = ymdArr[1];
-				this.birthdayObj.day = ymdArr[2];
+				let userBirthdayDateObj = new Date(user.userBirthday);
+				this.birthdayObj.year = userBirthdayDateObj.getFullYear();
+				this.birthdayObj.month = userBirthdayDateObj.getMonth() + 1;
+				this.birthdayObj.day = userBirthdayDateObj.getDate();
 			}
-			if(user.userAddress){
-				let pcaArr = user.userAddress.split('-');
-				this.addressObj.province = pcaArr[0];
-				this.addressObj.city =  pcaArr[1];
+			if(user.userProvince){
+				this.addressObj.province = user.userProvince;
+			}
+			if(user.userCity){
+				this.addressObj.city =  user.userCity;
 			}
 			if(user.userSchool){
 				this.collegeObj.collegeName = user.userSchool;

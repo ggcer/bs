@@ -114,6 +114,8 @@
 					smsCode: null,
 				},
 				
+				devicedId: window.device ? window.device.uuid : ((new Date()).getTime()) + '',
+				
 				rememberUserHeadImg: null,
 				initUserHeadImg: require('../../assets/image/dlrb.jpg'),
 			}
@@ -169,7 +171,7 @@
 						}],
 					}, (data) => {
 						if(data.refreshToken){
-							this.loginSuccessHandler(data);
+							this.loginSuccessHandler(data, 'PASSWORD');
 						}else{	//登录失败，登录信息不通过
 							util.ui.toast(data.msg, 'WARN');
 						}
@@ -187,53 +189,48 @@
 						});
 						return;
 					}
-					if(window.device){
-						//手机验证码登录
-						util.http.customReq.post('/authentication/mobile', this.mobileLoginObj, {
-							auth: {
-							    username: globalConfig.username,
-							    password: globalConfig.password
-							},
-							headers: {
-								'devicedId': window.device.uuid,
-								'Content-Type': 'application/x-www-form-urlencoded',
-							},
-							transformRequest: [function (data) {
-							    let ret = ''
-							    for (let it in data) {
-							      ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
-							    }
-							    return ret
-							}],
-						}, (data) => {
-							//登录成功
-							if(data.refreshToken){
-								this.loginSuccessHandler(data);
-							}else{	//登录失败，登录信息不通过
-								util.ui.toast(data.msg, 'WARN');
-							}
-						})
-					}else{
-						util.ui.toast('不存在的device对象', 'WARN');
-					}
+					
+					//手机验证码登录
+					util.http.customReq.post('/authentication/mobile', this.mobileLoginObj, {
+						auth: {
+						    username: globalConfig.username,
+						    password: globalConfig.password
+						},
+						headers: {
+							'devicedId': this.devicedId,
+							'Content-Type': 'application/x-www-form-urlencoded',
+						},
+						transformRequest: [function (data) {
+						    let ret = ''
+						    for (let it in data) {
+						      ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+						    }
+						    return ret
+						}],
+					}, (data) => {
+						//登录成功
+						if(data.refreshToken){
+							this.loginSuccessHandler(data, 'SMSCODE');
+						}else{	//登录失败，登录信息不通过
+							util.ui.toast(data.msg, 'WARN');
+						}
+					})
 				}
 			},
-			loginSuccessHandler(loginReturnData){
+			loginSuccessHandler(loginReturnData, loginType){
 				let user = util.common.copyObjFromBo('user');
-				util.common.copyFieldValue(user, loginReturnData.additionalInformation.userInfo);
 				//储存accessToken,refreshToken,tokenType
 				user.accessToken = loginReturnData.value;
 				user.refreshToken = loginReturnData.refreshToken.value;
 				user.tokenType = loginReturnData.tokenType;
 				util.cache.set('user', user);
-				console.log('登录用户缓存：', user);
+				console.log('用户登陆成功，token缓存完毕：', user);
 				
-				//存入该次登录的用户登录名与头像
+				//存入该次用户登录的信息，用于退出登陆时回显
 				let rememberUserLoginMsg = {
-					username: this.passwordLoginObj.username,
-					mobile: user.userPhone,
-					userHeadImg: user.userHeadImg,
-					isLoginByPassword: true,
+					username: this.passwordLoginObj.username,	//当为账号密码登陆时会有此信息
+					mobile: this.mobileLoginObj.mobile,				//当为手机验证码登陆时会有此信息
+					isLoginByPassword: loginType == 'PASSWORD' ? true : false,		//是否为账号密码登陆
 				};
 				util.cache.set('rememberUserLoginMsg', rememberUserLoginMsg);
 				console.log('存入的用户登录信息：', rememberUserLoginMsg);
@@ -278,34 +275,30 @@
 					});
 					return;
 				}
-				if(window.device){
-					util.http.customReq.post('/register/user', registerObj, {
-						headers: {
-							'devicedId': window.device.uuid,
-							'Content-Type': 'application/x-www-form-urlencoded',
-						},
-						transformRequest: [function (data) {
-						    let ret = ''
-						    for (let it in data) {
-						      ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
-						    }
-						    return ret
-						}],
-					}, (data) => {
-						if(data.result){
-							util.ui.toast('注册成功', 'SUCCESS');
-							this.goToLogin();
-							this.goToPasswordLogin();
-							this.passwordLoginObj.username = registerObj.userPhone;
-							this.passwordLoginObj.password = registerObj.password;
-						}else{	//注册，注册信息不通过
-							util.ui.toast(data.msg, 'WARN');
-						}
-						
-					})
-				}else{
-					util.ui.toast('不存在的device对象', 'WARN');
-				}
+				util.http.customReq.post('/register/user', registerObj, {
+					headers: {
+						'devicedId': this.devicedId,
+						'Content-Type': 'application/x-www-form-urlencoded',
+					},
+					transformRequest: [function (data) {
+					    let ret = ''
+					    for (let it in data) {
+					      ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+					    }
+					    return ret
+					}],
+				}, (data) => {
+					if(data.result){
+						util.ui.toast('注册成功', 'SUCCESS');
+						this.goToLogin();
+						this.goToPasswordLogin();
+						this.passwordLoginObj.username = registerObj.userPhone;
+						this.passwordLoginObj.password = registerObj.password;
+					}else{	//注册，注册信息不通过
+						util.ui.toast(data.msg, 'WARN');
+					}
+					
+				})
 			},
 			getSmsCode(type) {
 				let reg = /^1[34578]\d{9}$/;
@@ -321,33 +314,28 @@
 						}
 					}
 					util.ui.confirm(`我们将发送短信验证码到：${mobile}`, () => {
-						if(window.device){
-							util.http.customReq.get('/code/sms', {
-								mobile: mobile
-							}, {
-								headers: {
-									'devicedId': window.device.uuid,
-								}
-							}, (data) => {
-								if(data.result === false){
-									util.ui.toast(data.msg, 'WARN');
-								}else{
-									//发送成功后60秒后才能再次发送验证码
-									this.getLoginSmsCodeDisableSeconds = 60;
-									let getLoginSmsCodeDisableSecondsInterval = setInterval(() => {
-										this.getLoginSmsCodeDisableSeconds--;
-										if(this.getLoginSmsCodeDisableSeconds <= 0){
-											clearInterval(getLoginSmsCodeDisableSecondsInterval);
-										}
-									}, 1000)
-									util.ui.toast(`短信验证码已发送至：${mobile}`, 'SUCCESS');
-									console.log(data);
-								}
-							})
-						}else{
-							util.ui.toast('不存在的device对象', 'WARN');
-						}
-						
+						util.http.customReq.get('/code/sms', {
+							mobile: mobile
+						}, {
+							headers: {
+								'devicedId': this.devicedId,
+							}
+						}, (data) => {
+							if(data.result === false){
+								util.ui.toast(data.msg, 'WARN');
+							}else{
+								//发送成功后60秒后才能再次发送验证码
+								this.getLoginSmsCodeDisableSeconds = 60;
+								let getLoginSmsCodeDisableSecondsInterval = setInterval(() => {
+									this.getLoginSmsCodeDisableSeconds--;
+									if(this.getLoginSmsCodeDisableSeconds <= 0){
+										clearInterval(getLoginSmsCodeDisableSecondsInterval);
+									}
+								}, 1000)
+								util.ui.toast(`短信验证码已发送至：${mobile}`, 'SUCCESS');
+								console.log(data);
+							}
+						})
 					})
 				}else if(type == 'REGISTER'){
 					let mobile = this.registerObj.userPhone;
@@ -361,32 +349,28 @@
 						}
 					}
 					util.ui.confirm(`我们将发送短信验证码到：${mobile}`, () => {
-						if(window.device){
-							util.http.customReq.get('/register/code', {
-								mobile: mobile
-							}, {
-								headers: {
-									'devicedId': window.device.uuid,
-								}
-							}, (data) => {
-								if(data.result){
-									//发送成功后60秒后才能再次发送验证码
-									this.getRegisterSmsCodeDisableSeconds = 60;
-									let getRegisterSmsCodeDisableSecondsInterval = setInterval(() => {
-										this.getRegisterSmsCodeDisableSeconds--;
-										if(this.getRegisterSmsCodeDisableSeconds <= 0){
-											clearInterval(getRegisterSmsCodeDisableSecondsInterval);
-										}
-									}, 1000)
-									util.ui.toast(`短信验证码已发送至：${mobile}`, 'SUCCESS');
-									console.log(data);
-								}else{
-									util.ui.toast(data.msg, 'WARN');
-								}
-							})
-						}else{
-							util.ui.toast('不存在的device对象', 'WARN');
-						}
+						util.http.customReq.get('/register/code', {
+							mobile: mobile
+						}, {
+							headers: {
+								'devicedId': this.devicedId,
+							}
+						}, (data) => {
+							if(data.result){
+								//发送成功后60秒后才能再次发送验证码
+								this.getRegisterSmsCodeDisableSeconds = 60;
+								let getRegisterSmsCodeDisableSecondsInterval = setInterval(() => {
+									this.getRegisterSmsCodeDisableSeconds--;
+									if(this.getRegisterSmsCodeDisableSeconds <= 0){
+										clearInterval(getRegisterSmsCodeDisableSecondsInterval);
+									}
+								}, 1000)
+								util.ui.toast(`短信验证码已发送至：${mobile}`, 'SUCCESS');
+								console.log(data);
+							}else{
+								util.ui.toast(data.msg, 'WARN');
+							}
+						})
 					})
 				}
 			},

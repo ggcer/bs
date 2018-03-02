@@ -14,13 +14,13 @@
 		<app-content slot="appContent">
 			<div class="refresh-div" id="refresh-div">
 				<div class="runner-wrap" v-show="!isShowAppBar">
-					<div class='kai animate' id='running' :style="{backgroundImage: 'url(' + runnerImgSrc + ')'}">
+					<div class='kai animate' id='home-running' :style="{backgroundImage: 'url(' + runnerImgSrc + ')'}">
 					</div>
 				</div>
 			</div>
 			<swiper :options="swiperOption">
 				<swiper-slide>
-					<img src="../assets/image/swiper/swiper1.jpg" class="swiper-img" />
+					<img src="../assets/image/other/demoTemp/zx.jpg" class="swiper-img" />
 				</swiper-slide>
 				<swiper-slide>
 					<img src="../assets/image/swiper/swiper2.jpg" class="swiper-img" />
@@ -128,25 +128,25 @@
 				runnerImgSrc: require('../assets/image/other/head-loading-runner.png'),
 				
 				activeOrgList: [{
-					orgImg: require('../assets/image/swiper/swiper1.jpg'),
+					orgImg: require('../assets/image/other/demoTemp/ymq.jpg'),
 					desc: '渤海大学羽毛球协会欢迎广大渤大的学生加入本社，共同交流技术',
 					addDesc: '羽毛球协会',
 					hotCount: 1290,
 					orgMemberCount: 51,
 				},{
-					orgImg: require('../assets/image/swiper/swiper2.jpg'),
+					orgImg: require('../assets/image/other/demoTemp/bwt.jpg'),
 					desc: '青春激情飞扬，没有极限...',
 					addDesc: '渤舞堂',
 					hotCount: 995,
 					orgMemberCount: 39,
 				},{
-					orgImg: require('../assets/image/swiper/swiper3.jpg'),
+					orgImg: require('../assets/image/other/demoTemp/sfxh.jpg'),
 					desc: '以文会友，活动地址渤海大学图书馆，报名请加微信群',
 					addDesc: '书法协会',
 					hotCount: 723,
 					orgMemberCount: 102,
 				},{
-					orgImg: require('../assets/image/bg/user-bg.jpg'),
+					orgImg: require('../assets/image/other/demoTemp/blxh.jpg'),
 					desc: '舌战群儒，毫无畏惧',
 					addDesc: '辩论协会',
 					hotCount: 1290,
@@ -172,7 +172,7 @@
 					$('#refresh-div').animate({
 						height: 0
 					}, 300, () => {
-						$('#running').removeClass('run');
+						$('#home-running').removeClass('run');
 						this.isHeadLoading = false;
 						this.isShowAppBar = true;
 						this.nowTurn = null;
@@ -240,6 +240,26 @@
 		},
 		mounted() {
 			this.user = util.cache.get('user');
+			//如果为登陆页跳转过来则去获取用户详细信息
+			if(!this.user.userId){
+				//获取用户信息
+				util.http.normalReq.get('/USER-CLIENT/userdetail', {
+				}, (data) => {
+					if(data.result == true){
+						util.common.copyFieldValue(this.user, data.data);
+						util.cache.set('user', this.user);
+						
+						//在取到当前登陆用户信息后 将用户头像存入保存的用户登陆信息，用于退出登陆时回显
+						let rememberUserLoginMsg = util.cache.get('rememberUserLoginMsg');
+						rememberUserLoginMsg.userHeadImg = this.user.userHeadImg,
+						util.cache.set('rememberUserLoginMsg', rememberUserLoginMsg);
+						console.log('取得用户头像的用户登录信息：', rememberUserLoginMsg);
+					}
+				}, (err) => {
+					
+				})
+			}
+			
 			$('#head-search').width($(window).width() - 130);
 			$(window).resize(() => {
 				console.log('window resize');
@@ -265,7 +285,7 @@
 			let refreshDiv = $('#refresh-div');
 			let appSlideContent = $('#app-slide-content');
 			let appSlideModel = $('#app-slide-model');
-			$(window).on('touchmove', (e) => {
+			$(window).on('touchmove', (event) => {
 				let scrollTop = $('#app-wrap').scrollTop();
 				let touch = event.targetTouches[0];
 				beforeX = afterX;
@@ -338,22 +358,22 @@
 					}
 				}
 			});
-			$(window).on('touchstart', (e) => {
+			$(window).on('touchstart', (event) => {
 				appSlideContent.stop(true);
 				let touch = event.targetTouches[0];
 				startX = touch.pageX;
 				beforeX = 0;
-				afterX = 0;
+				afterX = startX;
 				maxPullX = 0;
 				isLeft = parseInt(appSlideContent.css('left')) == 0 ? false : true;
 				isTryToLeft = isLeft ? true : false;
 				
 				startY = touch.pageY;
 				beforeY = 0;
-				afterY = 0;
+				afterY = startY;
 				maxPullY = 0;
 			});
-			$(window).on('touchend', (e) => {
+			$(window).on('touchend', (event) => {
 				if(this.nowTurn == 'left'){
 //					console.log(isTryToLeft);
 					if(isTryToLeft){
@@ -367,7 +387,7 @@
 					$('#app-wrap').removeClass('overflowHidden');
 					if(this.isHeadLoading == false){
 						if(refreshDiv.height() > 60){
-							$('#running').addClass('run');
+							$('#home-running').addClass('run');
 							this.isHeadLoading = true;
 							this.refresh();
 						}else{
@@ -618,7 +638,7 @@
 		letter-spacing: 1px;
 		font-size: 13px;
 		line-height: 30px;
-		color: #757575;
+		color: #939393;
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;

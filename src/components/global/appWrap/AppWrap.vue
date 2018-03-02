@@ -26,7 +26,7 @@
 		},
 		mounted() {
 			//隐藏所有loading
-			util.ui.hideAllLoading();
+			util.ui.hideLoading('ALL');
 		}
 	}
 </script>

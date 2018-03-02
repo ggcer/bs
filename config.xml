@@ -41,25 +41,25 @@
     <preference name="ShowSplashScreenSpinner" value="false" />
     <engine name="android" spec="^6.4.0" />
     <engine name="ios" spec="~4.5.4" />
-    <plugin name="cordova-plugin-background-mode" spec="^0.7.2" />
-    <plugin name="cordova-plugin-camera" spec="^4.0.1" />
-    <plugin name="cordova-plugin-splashscreen" spec="^5.0.1" />
-    <plugin name="cordova-plugin-statusbar" spec="^2.4.1" />
-    <plugin name="cordova-sqlite-storage" spec="^2.1.5" />
-    <plugin name="phonegap-plugin-barcodescanner" spec="^7.0.0">
-        <variable name="CAMERA_USAGE_DESCRIPTION" value=" " />
-    </plugin>
-    <plugin name="cordova-plugin-whitelist" spec="1" />
-    <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
     <plugin name="cordova-plugin-alipay-v2" spec="0.0.4">
         <variable name="APP_ID" value="2016080600177461" />
     </plugin>
+    <plugin name="cordova-plugin-background-mode" spec="^0.7.2" />
     <plugin name="cordova-plugin-baidumaplocation" spec="^3.2.0">
         <variable name="ANDROID_KEY" value="3IYf8CExg3Qf6xxZeCT7ybGDib55Dw9d" />
         <variable name="IOS_KEY" value="OIlX6M6Pvf7k0Z8sUHLkGf7WYaje2Yfc" />
         <variable name="IOS_LOCATION_DESC" value="请点击'好'以允许访问。" />
     </plugin>
+    <plugin name="cordova-plugin-camera" spec="^4.0.1" />
+    <plugin name="cordova-plugin-splashscreen" spec="^5.0.1" />
+    <plugin name="cordova-plugin-statusbar" spec="^2.4.1" />
+    <plugin name="cordova-plugin-whitelist" spec="1" />
+    <plugin name="cordova-sqlite-storage" spec="^2.1.5" />
+    <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
     <plugin name="jpush-phonegap-plugin" spec="^3.3.0">
         <variable name="APP_KEY" value="fbfaef04a0930b9075126e9a" />
+    </plugin>
+    <plugin name="phonegap-plugin-barcodescanner" spec="^7.0.0">
+        <variable name="CAMERA_USAGE_DESCRIPTION" value=" " />
     </plugin>
 </widget>

@@ -6,6 +6,11 @@ import college from '../assets/js/json/college'
 const ui = {
 	//toast
 	toast(content, toastType, duration) {
+		console.log(content);
+		if(content.length > 30){
+			content = content.substr(0, 30);
+			content += '...';
+		}
 		store.commit('UPDATE_TOAST', {
 			isShowToast: true,
 			isWarnToast: toastType == 'WARN' ? true : false,
@@ -66,30 +71,135 @@ const ui = {
 		})
 	},
 
-	//显示加载框
-	showLoading() {
-		store.commit('UPDATE_LOADING', {
-			isShowCenterLoading: true,
-		})
+	//显示居中加载框并显示加载模态层
+	showLoading(type) {
+		let payLoad = {};
+		if(type == 'TOP'){
+			payLoad.isShowTopLoading = true;
+		}else if(type == 'CENTER'){
+			payLoad.isShowCenterLoading = true;
+		}else if(type == 'BOTTOM'){
+			payLoad.isShowBottomLoading = true;
+		}
+		store.commit('UPDATE_LOADING', payLoad)
 	},
 	//隐藏加载框
-	hideAllLoading() {
-		store.commit('UPDATE_LOADING', {
-			isShowHeadLoading: false,
-			isShowCenterLoading: false
+	hideLoading(type) {
+		let payLoad = {};
+		if(type == 'TOP'){
+			payLoad.isShowTopLoading = false;
+			$('#app-bar').height(70);
+			$('#app-content').css('paddingTop', 70);
+			$('#app-bar').css('backgroundColor', '#4AA1FF');
+		}else if(type == 'CENTER'){
+			payLoad.isShowCenterLoading = false;
+		}else if(type == 'BOTTOM'){
+			payLoad.isShowBottomLoading = false;
+			$('#load-more-div').height(40);
+		}else if(type == 'ALL'){
+			payLoad.isShowCenterLoading = false;
+			payLoad.isShowTopLoading = false;
+			payLoad.isShowBottomLoading = false;
+			
+			$('#app-bar').height(70);
+			$('#app-content').css('paddingTop', 70);
+			$('#app-bar').css('backgroundColor', '#4AA1FF');
+			
+			$('#load-more-div').height(40);
+		}
+		
+		store.commit('UPDATE_LOADING', payLoad);
+	},
+	
+	//显示图片预览器
+	showImgViewer(imgSrcList, nowActiveIndex) {
+		//如果imgSrcList传入的是一个字符串(只有一张图片，则解析成数组形式)
+		if(typeof imgSrcList == 'string'){
+			imgSrcList = [].push(imgSrcList);
+		}
+		//nowActiveIndex如果未传入
+		if(!nowActiveIndex){
+			nowActiveIndex = 0;
+		}
+		store.commit('UPDATE_IMGVIEWER', {
+			isShowImgViewer: true,
+			imgSrcList: imgSrcList,
+			nowActiveIndex: nowActiveIndex
 		})
-		$('#app-bar').height(70);
-		$('#app-content').css('paddingTop', 70);
-		$('#app-bar').css('backgroundColor', '#4AA1FF');
+		
+		let startX = 0;
+		let beforeX = 0;
+		let afterX = 0;
+		let isTryToLeft = true;
+		
+		$('#img-wrap').on('touchmove', (event) => {
+			let touch = event.targetTouches[0];
+			beforeX = afterX;
+			afterX = touch.pageX;
+			if(beforeX < afterX){
+				isTryToLeft = true;
+			}else{
+				isTryToLeft = false;
+			}
+			let beforeLeft = parseFloat($('#img-wrap').css('left'));
+			let afterLeft = beforeLeft + (afterX - beforeX) * 0.8;
+			$('#img-wrap').css('left', afterLeft);
+		})
+		$('#img-wrap').on('touchstart', (event) => {
+			let touch = event.targetTouches[0];
+			startX = touch.pageX;
+			beforeX = 0;
+			afterX = startX;
+			isTryToLeft = true;
+		});
+		$('#img-wrap').on('touchend', (event) => {
+			let nowActiveIndex = store.getters.imgViewer.nowActiveIndex;
+			if(isTryToLeft){
+				//左划后原图片在左侧才认定为真的左划，否则当前显示图片index不变
+				if(parseFloat($('#img-wrap').css('left')) > -nowActiveIndex * (parseFloat($(window).width()) + 15)){
+					nowActiveIndex--;
+				}
+				if(nowActiveIndex < 0){
+					nowActiveIndex = 0;
+				}
+			}else{
+				//右划后原图片在右侧才认定为真的右划，否则当前显示图片index不变
+				if(parseFloat($('#img-wrap').css('left')) < -nowActiveIndex * (parseFloat($(window).width()) + 15)){
+					nowActiveIndex++;
+				}
+
+				if(nowActiveIndex + 1 > store.getters.imgViewer.imgSrcList.length){
+					nowActiveIndex = store.getters.imgViewer.imgSrcList.length - 1;
+				}
+			}
+			store.commit('UPDATE_IMGVIEWER', {
+				nowActiveIndex: nowActiveIndex
+			})
+			$('#img-wrap').animate({
+				left: - nowActiveIndex * (parseFloat($(window).width()) + 15)
+			}, 200, 'swing')
+		});
+	},
+	
+	//隐藏图片预览器
+	hideImgViewer() {
+		store.commit('UPDATE_IMGVIEWER', {
+			isShowImgViewer: false,
+			imgSrcList: [],
+			nowActiveIndex: 0
+		})
+		$('#img-wrap').off('touchmove');
+		$('#img-wrap').off('touchstart');
+		$('#img-wrap').off('touchend');
 	},
 
 	//获取性别picker
 	getSexPicker(sexObj) {
 		let sexData = [{
-			value: 1,
+			value: '1',
 			text: '男'
 		}, {
-			value: 2,
+			value: '2',
 			text: '女'
 		}];
 

@@ -12,7 +12,7 @@ let normalAxios = axios.create({
 //一般axios请求拦截器[一般接口验证accessToken]
 normalAxios.interceptors.request.use(config => {
 	//显示加载模态层
-	util.ui.showLoading();
+	util.ui.showLoading('CENTER');
 	
 	console.log('一般请求成功发出--config：', config);
 	let accessToken = util.cache.get('user').accessToken;
@@ -32,7 +32,7 @@ normalAxios.interceptors.request.use(config => {
 	return config;
 }, error => {
 	//关闭加载模态层
-	util.ui.hideAllLoading();
+	util.ui.hideLoading('CENTER');
 	
 	console.error(error);
 	util.ui.toast('发出请求时出错[1]', 'WARN');
@@ -41,13 +41,13 @@ normalAxios.interceptors.request.use(config => {
 //一般axios返回拦截器
 normalAxios.interceptors.response.use(response => {
 	//关闭加载模态层
-	util.ui.hideAllLoading();
+	util.ui.hideLoading('CENTER');
 
 	console.log('一般请求成功返回--data：', response.data);
 	return response;
 }, error => {
 	//关闭加载模态层
-	util.ui.hideAllLoading();
+	util.ui.hideLoading('CENTER');
 	
 	return Promise.reject(error);
 })
@@ -100,17 +100,17 @@ function normalReqErrorHandler(error, succCb, failCb){
 					reConfig.headers.Authorization = `${user.tokenType} ${user.accessToken}`;
 					//显示加载模态层
 					console.log('二次请求成功发出--reConfig：', reConfig);
-					util.ui.showLoading();
+					util.ui.showLoading('CENTER');
 					axios.request(reConfig)
 					.then((res) => {
 						console.log('二次请求成功返回--data：', res.data);
 						//关闭加载模态层
-						util.ui.hideAllLoading();
+						util.ui.hideLoading('CENTER');
 						succCb(res.data);
 					})
 					.catch((err) => {
 						//关闭加载模态层
-						util.ui.hideAllLoading();
+						util.ui.hideLoading('CENTER');
 						if(err.response){	//服务器出错
 							console.error('二次请求失败，服务器出错，错误代码：' + err.response.status);
 							util.ui.toast('二次请求失败，服务器出错，错误代码：' + err.response.status, 'WARN');
@@ -161,13 +161,13 @@ let customAxios = (config) => {
 	//定制axios请求拦截器
 	returnCustomAxios.interceptors.request.use(config => {
 		//显示加载模态层
-		util.ui.showLoading();
+		util.ui.showLoading('CENTER');
 		
 		console.log('定制请求成功发出--config：', config);
 		return config;
 	}, error => {
 		//关闭加载模态层
-		util.ui.hideAllLoading();
+		util.ui.hideLoading('CENTER');
 	
 		console.error(error);
 		util.ui.toast('发出请求时出错[2]', 'WARN');
@@ -176,13 +176,13 @@ let customAxios = (config) => {
 	//定制axios返回拦截器
 	returnCustomAxios.interceptors.response.use(response => {
 		//关闭加载模态层
-		util.ui.hideAllLoading();
+		util.ui.hideLoading('CENTER');
 		
 		console.log('定制请求成功返回--data：', response.data);
 		return response;
 	}, error => {
 		//关闭加载模态层
-		util.ui.hideAllLoading();
+		util.ui.hideLoading('CENTER');
 		
 		return Promise.reject(error)
 	})
