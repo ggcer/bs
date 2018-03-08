@@ -128,6 +128,7 @@ const ui = {
 		})
 		
 		let startX = 0;
+		let maxPullX = 0;
 		let beforeX = 0;
 		let afterX = 0;
 		let isTryToLeft = true;
@@ -136,18 +137,24 @@ const ui = {
 			let touch = event.targetTouches[0];
 			beforeX = afterX;
 			afterX = touch.pageX;
-			if(beforeX < afterX){
-				isTryToLeft = true;
-			}else{
-				isTryToLeft = false;
+			maxPullX = maxPullX > Math.abs(afterX - startX) ? maxPullX : Math.abs(afterX - startX);
+			
+			//最小的触发滑动距离为10
+			if(maxPullX > 10){
+				if(beforeX < afterX){
+					isTryToLeft = true;
+				}else{
+					isTryToLeft = false;
+				}
+				let beforeLeft = parseFloat($('#img-wrap').css('left'));
+				let afterLeft = beforeLeft + (afterX - beforeX) * 0.8;
+				$('#img-wrap').css('left', afterLeft);
 			}
-			let beforeLeft = parseFloat($('#img-wrap').css('left'));
-			let afterLeft = beforeLeft + (afterX - beforeX) * 0.8;
-			$('#img-wrap').css('left', afterLeft);
 		})
 		$('#img-wrap').on('touchstart', (event) => {
 			let touch = event.targetTouches[0];
 			startX = touch.pageX;
+			maxPullX = 0;
 			beforeX = 0;
 			afterX = startX;
 			isTryToLeft = true;

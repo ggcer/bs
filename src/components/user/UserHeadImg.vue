@@ -6,7 +6,7 @@
 		</app-bar>
 		<app-content slot="appContent">
 			<div class="user-img-wrap" id="user-img-wrap">
-				<img :src="userHeadImg ? userHeadImg : initUserHeadImg" class="user-avatar">
+				<img :src="user.userHeadImg ? user.userHeadImg : initUserHeadImg" class="user-avatar">
 			</div>
 			
 			<mu-bottom-sheet :open="isOpenBottomSheet" @close="isOpenBottomSheet = false">
@@ -27,7 +27,7 @@
 		name: 'userHeadImg',
 		data() {
 			return {
-				userHeadImg: null,
+				user: {},
 				isOpenBottomSheet: false,
 				
 				initUserHeadImg: require('../../assets/image/dlrb.jpg'),
@@ -43,24 +43,22 @@
 			}
 		},
 		mounted() {
-			let user = util.cache.get('user');
-			let userHeadImg = util.cache.get('userHeadImg', true);
-			if(userHeadImg){
+			this.user = util.cache.get('user');
+			let userHeadImgCache = util.cache.get('userHeadImg', true);
+			//是否有缓存的用户头像，如果有，代表用户新设置了头像
+			if(userHeadImgCache){
 				util.http.normalReq.post('/USER-CLIENT/user', {
-					userId: user.userId,
-					userHeadImg: userHeadImg
+					userId: this.user.userId,
+					userHeadImg: userHeadImgCache
 				},
 				(data) => {
 					if(data.result){
-						this.userHeadImg = userHeadImg;
-						user.userHeadImg = userHeadImg;
+						this.user.userHeadImg = userHeadImgCache;
 						util.cache.set('user', user);
 					}else{
 						util.ui.toast(data.msg, 'WARN');
 					}
 				})
-			}else{
-				this.userHeadImg = user.userHeadImg;
 			}
 			let userImgWrap = $('#user-img-wrap');
 			userImgWrap.height(userImgWrap.width());
