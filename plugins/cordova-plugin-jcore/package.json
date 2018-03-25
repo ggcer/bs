@@ -10,17 +10,17 @@
         "spec": "latest",
         "type": "tag"
       },
-      "F:\\pro\\bs"
+      "F:\\test\\bs"
     ]
   ],
   "_from": "cordova-plugin-jcore@latest",
-  "_id": "cordova-plugin-jcore@1.1.12",
+  "_id": "cordova-plugin-jcore@1.2.0",
   "_inCache": true,
   "_location": "/cordova-plugin-jcore",
   "_nodeVersion": "8.9.1",
   "_npmOperationalInternal": {
     "host": "s3://npm-registry-packages",
-    "tmp": "tmp/cordova-plugin-jcore-1.1.12.tgz_1516962305125_0.1797716640867293"
+    "tmp": "tmp/cordova-plugin-jcore_1.2.0_1519631462653_0.22536759460661293"
   },
   "_npmUser": {
     "name": "hev1n",
@@ -41,11 +41,11 @@
     "#USER",
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/cordova-plugin-jcore/-/cordova-plugin-jcore-1.1.12.tgz",
-  "_shasum": "d65fabf5af437083fd7c27678c9f286c2e2d9910",
+  "_resolved": "https://registry.npmjs.org/cordova-plugin-jcore/-/cordova-plugin-jcore-1.2.0.tgz",
+  "_shasum": "cd7e1f8f4843215de8656e9fb5ae08539a4d485d",
   "_shrinkwrap": null,
   "_spec": "cordova-plugin-jcore",
-  "_where": "F:\\pro\\bs",
+  "_where": "F:\\test\\bs",
   "author": {
     "name": "wilhantian, jiguang"
   },
@@ -64,9 +64,11 @@
   "devDependencies": {},
   "directories": {},
   "dist": {
-    "integrity": "sha512-Ib9pQrypiOaaeAGrrF+8uLdD8JiwXKz5Cv5PTMp4MteRtqE8U4RK+ryquQTMPEUAq/3upPiNZTu4gICON09brg==",
-    "shasum": "d65fabf5af437083fd7c27678c9f286c2e2d9910",
-    "tarball": "https://registry.npmjs.org/cordova-plugin-jcore/-/cordova-plugin-jcore-1.1.12.tgz"
+    "integrity": "sha512-V4mK0Q/wVn4AgvIgoxOr9l6rVCUTFM+hH2iFhvBfcR3PdYwpccc25c8CnQjK8QYHGZ0W7Lxwy1BihytOOOW8vA==",
+    "shasum": "cd7e1f8f4843215de8656e9fb5ae08539a4d485d",
+    "tarball": "https://registry.npmjs.org/cordova-plugin-jcore/-/cordova-plugin-jcore-1.2.0.tgz",
+    "fileCount": 15,
+    "unpackedSize": 13726843
   },
   "gitHead": "477a7385f8e3ea7282ca1b771cdfa9972ac3ca15",
   "homepage": "https://github.com/jpush/cordova-plugin-jcore#readme",
@@ -99,5 +101,5 @@
     "type": "git",
     "url": "git+https://github.com/jpush/cordova-plugin-jcore.git"
   },
-  "version": "1.1.12"
+  "version": "1.2.0"
 }

@@ -26,7 +26,6 @@
       "PACKAGE_NAME": "io.cordova.hellocordova"
     },
     "phonegap-plugin-barcodescanner": {
-      "CAMERA_USAGE_DESCRIPTION": " ",
       "PACKAGE_NAME": "io.cordova.hellocordova"
     },
     "ionic-plugin-keyboard": {
@@ -34,12 +33,6 @@
     },
     "cordova-plugin-alipay-v2": {
       "APP_ID": "2016080600177461",
-      "PACKAGE_NAME": "io.cordova.hellocordova"
-    },
-    "cordova-plugin-baidumaplocation": {
-      "ANDROID_KEY": "3IYf8CExg3Qf6xxZeCT7ybGDib55Dw9d",
-      "IOS_KEY": "OIlX6M6Pvf7k0Z8sUHLkGf7WYaje2Yfc",
-      "IOS_LOCATION_DESC": "请点击'好'以允许访问。",
       "PACKAGE_NAME": "io.cordova.hellocordova"
     },
     "jpush-phonegap-plugin": {

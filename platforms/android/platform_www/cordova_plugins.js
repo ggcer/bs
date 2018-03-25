@@ -99,14 +99,6 @@ module.exports = [
     ]
   },
   {
-    "id": "cordova-plugin-baidumaplocation.baidumap_location",
-    "file": "plugins/cordova-plugin-baidumaplocation/www/baidumap_location.js",
-    "pluginId": "cordova-plugin-baidumaplocation",
-    "clobbers": [
-      "baidumap_location"
-    ]
-  },
-  {
     "id": "jpush-phonegap-plugin.JPushPlugin",
     "file": "plugins/jpush-phonegap-plugin/www/JPushPlugin.js",
     "pluginId": "jpush-phonegap-plugin",
@@ -121,16 +113,15 @@ module.exports.metadata =
   "cordova-plugin-whitelist": "1.3.3",
   "cordova-plugin-device": "2.0.1",
   "cordova-plugin-background-mode": "0.7.2",
-  "cordova-plugin-camera": "4.0.1",
-  "cordova-plugin-splashscreen": "5.0.1",
+  "cordova-plugin-camera": "4.0.2",
+  "cordova-plugin-splashscreen": "5.0.2",
   "cordova-plugin-statusbar": "2.4.1",
-  "cordova-sqlite-storage": "2.1.5",
-  "phonegap-plugin-barcodescanner": "7.0.0",
+  "cordova-sqlite-storage": "2.3.0",
+  "phonegap-plugin-barcodescanner": "7.1.0",
   "ionic-plugin-keyboard": "2.2.1",
   "cordova-plugin-alipay-v2": "0.0.3",
-  "cordova-plugin-baidumaplocation": "3.2.0",
-  "cordova-plugin-jcore": "1.1.12",
-  "jpush-phonegap-plugin": "3.3.0"
+  "cordova-plugin-jcore": "1.2.0",
+  "jpush-phonegap-plugin": "3.4.1"
 };
 // BOTTOM OF METADATA
 });

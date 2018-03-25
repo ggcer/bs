@@ -1,5 +1,5 @@
 'use strict'
-// Template version: 1.2.8
+// Template version: 1.3.1
 // see http://vuejs-templates.github.io/webpack for documentation.
 
 const path = require('path')
@@ -10,15 +10,15 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-//  proxyTable: {		//网页测试时配置
-//    '/api': {			//后端服务器地址
-//      target: 'http://120.79.46.38:8761/webservice',
-//      changeOrigin: true,					//如果接口跨域，需要进行这个参数配置
-//      pathRewrite: {
-//        '^/api': '/'
-//      }
-//    }
-//  },
+    // proxyTable: {		//网页测试时配置
+    //   '/api': {			//后端服务器地址
+    //     target: 'http://120.79.46.38:8761/webservice',
+    //     changeOrigin: true,					//如果接口跨域，需要进行这个参数配置
+    //     pathRewrite: {
+    //       '^/api': '/'
+    //     }
+    //   }
+    // },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
@@ -41,7 +41,7 @@ module.exports = {
     // https://vue-loader.vuejs.org/en/options.html#cachebusting
     cacheBusting: true,
 
-    cssSourceMap: true,
+    cssSourceMap: true
   },
 
   build: {

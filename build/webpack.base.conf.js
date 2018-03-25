@@ -61,7 +61,7 @@ module.exports = {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
         loader: 'url-loader',
         options: {
-          limit: 100000,	//规定文件被打成依赖的文件大小上限，如果超过这个大小，则不会被打成依赖
+          limit: 10000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
       }

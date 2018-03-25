@@ -2,50 +2,50 @@
   "_args": [
     [
       {
-        "raw": "cordova-plugin-splashscreen@5.0.1",
+        "raw": "cordova-plugin-splashscreen@^5.0.2",
         "scope": null,
         "escapedName": "cordova-plugin-splashscreen",
         "name": "cordova-plugin-splashscreen",
-        "rawSpec": "5.0.1",
-        "spec": "5.0.1",
-        "type": "version"
+        "rawSpec": "^5.0.2",
+        "spec": ">=5.0.2 <6.0.0",
+        "type": "range"
       },
-      "F:\\pro\\bs"
+      "F:\\test\\bs"
     ]
   ],
-  "_from": "cordova-plugin-splashscreen@5.0.1",
-  "_id": "cordova-plugin-splashscreen@5.0.1",
+  "_from": "cordova-plugin-splashscreen@>=5.0.2 <6.0.0",
+  "_id": "cordova-plugin-splashscreen@5.0.2",
   "_inCache": true,
   "_location": "/cordova-plugin-splashscreen",
-  "_nodeVersion": "8.2.1",
+  "_nodeVersion": "6.10.2",
   "_npmOperationalInternal": {
     "host": "s3://npm-registry-packages",
-    "tmp": "tmp/cordova-plugin-splashscreen-5.0.1.tgz_1514690816893_0.9593492760322988"
+    "tmp": "tmp/cordova-plugin-splashscreen-5.0.2.tgz_1517268294206_0.18214110611006618"
   },
   "_npmUser": {
-    "name": "macdonst",
-    "email": "simon.macdonald@gmail.com"
+    "name": "surajpindoria",
+    "email": "suraj.pindoria@yahoo.com"
   },
   "_npmVersion": "4.6.1",
   "_phantomChildren": {},
   "_requested": {
-    "raw": "cordova-plugin-splashscreen@5.0.1",
+    "raw": "cordova-plugin-splashscreen@^5.0.2",
     "scope": null,
     "escapedName": "cordova-plugin-splashscreen",
     "name": "cordova-plugin-splashscreen",
-    "rawSpec": "5.0.1",
-    "spec": "5.0.1",
-    "type": "version"
+    "rawSpec": "^5.0.2",
+    "spec": ">=5.0.2 <6.0.0",
+    "type": "range"
   },
   "_requiredBy": [
     "#USER",
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/cordova-plugin-splashscreen/-/cordova-plugin-splashscreen-5.0.1.tgz",
-  "_shasum": "e227172593942c2479b0e1f769feddc21c8b55a3",
+  "_resolved": "https://registry.npmjs.org/cordova-plugin-splashscreen/-/cordova-plugin-splashscreen-5.0.2.tgz",
+  "_shasum": "747e74f56e201cd585bc62d14bca19f6867ff1ed",
   "_shrinkwrap": null,
-  "_spec": "cordova-plugin-splashscreen@5.0.1",
-  "_where": "F:\\pro\\bs",
+  "_spec": "cordova-plugin-splashscreen@^5.0.2",
+  "_where": "F:\\test\\bs",
   "author": {
     "name": "Apache Software Foundation"
   },
@@ -69,8 +69,8 @@
   },
   "directories": {},
   "dist": {
-    "shasum": "e227172593942c2479b0e1f769feddc21c8b55a3",
-    "tarball": "https://registry.npmjs.org/cordova-plugin-splashscreen/-/cordova-plugin-splashscreen-5.0.1.tgz"
+    "shasum": "747e74f56e201cd585bc62d14bca19f6867ff1ed",
+    "tarball": "https://registry.npmjs.org/cordova-plugin-splashscreen/-/cordova-plugin-splashscreen-5.0.2.tgz"
   },
   "engines": {
     "cordovaDependencies": {
@@ -97,6 +97,14 @@
   ],
   "license": "Apache-2.0",
   "maintainers": [
+    {
+      "name": "surajpindoria",
+      "email": "suraj.pindoria@yahoo.com"
+    },
+    {
+      "name": "jcesarmobile",
+      "email": "jcesarmobile@gmail.com"
+    },
     {
       "name": "macdonst",
       "email": "simon.macdonald@gmail.com"
@@ -142,5 +150,5 @@
     "test": "npm run jshint"
   },
   "types": "./types/index.d.ts",
-  "version": "5.0.1"
+  "version": "5.0.2"
 }

@@ -10,7 +10,7 @@
         "spec": "latest",
         "type": "tag"
       },
-      "F:\\pro\\bs"
+      "F:\\test\\bs"
     ]
   ],
   "_from": "cordova-plugin-background-mode@latest",
@@ -45,7 +45,7 @@
   "_shasum": "eaf5639c065a87231b3ecf757a6e28b101d0332f",
   "_shrinkwrap": null,
   "_spec": "cordova-plugin-background-mode",
-  "_where": "F:\\pro\\bs",
+  "_where": "F:\\test\\bs",
   "author": {
     "name": "Sebastián Katzer"
   },

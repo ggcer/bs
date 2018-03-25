@@ -1,5 +1,19 @@
 # Changes
 
+### cordova-sqlite-storage 2.3.0
+
+- Use SQLite 3.22.0 with SQLITE_DEFAULT_SYNCHRONOUS=3 (EXTRA DURABLE) compile-time setting on all platforms (Android/iOS/macOS/Windows) ref: litehelpers/Cordova-sqlite-storage#736
+
+### cordova-sqlite-storage 2.2.1
+
+- SQLITE_THREADSAFE=1 compile-time setting for iOS/macOS
+- Fix Android/iOS src copyright, perpetually
+
+## cordova-sqlite-storage 2.2.0
+
+- Android-sqlite-native-driver NDK objects in JAR to resolve issue on cordova-android@7
+- Fix SQLiteAndroidDatabase implementation for Turkish and other foreign locales
+
 ## cordova-sqlite-storage 2.1.5
 
 ##### cordova-sqlite-legacy-core 1.0.7

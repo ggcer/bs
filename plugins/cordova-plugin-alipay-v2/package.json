@@ -2,18 +2,18 @@
   "_args": [
     [
       {
-        "raw": "cordova-plugin-alipay-v2@0.0.4",
+        "raw": "cordova-plugin-alipay-v2",
         "scope": null,
         "escapedName": "cordova-plugin-alipay-v2",
         "name": "cordova-plugin-alipay-v2",
-        "rawSpec": "0.0.4",
-        "spec": "0.0.4",
-        "type": "version"
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
       },
-      "F:\\pro\\bs"
+      "F:\\test\\bs"
     ]
   ],
-  "_from": "cordova-plugin-alipay-v2@0.0.4",
+  "_from": "cordova-plugin-alipay-v2@latest",
   "_id": "cordova-plugin-alipay-v2@0.0.4",
   "_inCache": true,
   "_location": "/cordova-plugin-alipay-v2",
@@ -29,13 +29,13 @@
   "_npmVersion": "4.1.1",
   "_phantomChildren": {},
   "_requested": {
-    "raw": "cordova-plugin-alipay-v2@0.0.4",
+    "raw": "cordova-plugin-alipay-v2",
     "scope": null,
     "escapedName": "cordova-plugin-alipay-v2",
     "name": "cordova-plugin-alipay-v2",
-    "rawSpec": "0.0.4",
-    "spec": "0.0.4",
-    "type": "version"
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
   },
   "_requiredBy": [
     "#USER",
@@ -44,8 +44,8 @@
   "_resolved": "https://registry.npmjs.org/cordova-plugin-alipay-v2/-/cordova-plugin-alipay-v2-0.0.4.tgz",
   "_shasum": "6293d1ce957bf9d08bf1e3db86943fc63a6fe8b5",
   "_shrinkwrap": null,
-  "_spec": "cordova-plugin-alipay-v2@0.0.4",
-  "_where": "F:\\pro\\bs",
+  "_spec": "cordova-plugin-alipay-v2",
+  "_where": "F:\\test\\bs",
   "author": {
     "name": "hhjjj1010"
   },

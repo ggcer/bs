@@ -54,7 +54,7 @@
 				(data) => {
 					if(data.result){
 						this.user.userHeadImg = userHeadImgCache;
-						util.cache.set('user', user);
+						util.cache.set('user', this.user);
 					}else{
 						util.ui.toast(data.msg, 'WARN');
 					}

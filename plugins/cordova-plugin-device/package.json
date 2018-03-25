@@ -10,7 +10,7 @@
         "spec": "latest",
         "type": "tag"
       },
-      "F:\\pro\\bs"
+      "F:\\test\\bs"
     ]
   ],
   "_from": "cordova-plugin-device@latest",
@@ -45,7 +45,7 @@
   "_shasum": "9b9e2313e682119ff8402f68096a38bcc5013593",
   "_shrinkwrap": null,
   "_spec": "cordova-plugin-device",
-  "_where": "F:\\pro\\bs",
+  "_where": "F:\\test\\bs",
   "author": {
     "name": "Apache Software Foundation"
   },

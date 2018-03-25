@@ -132,7 +132,8 @@
 				this.user.userCity = this.addressStr.split('-')[1];
 				this.user.userSchool = this.collegeStr;
 				
-				let requestUser = util.common.shallowCopyObj(this.user);
+        let requestUser = util.common.shallowCopyObj(this.user);
+        console.log(requestUser);
 				//此页面不保存涉及用户头像和用户背景图片的保存，为了防止流量浪费，不传入这两个参数
 				requestUser.userHeadImg = null;
 				requestUser.userBgImg = null;
@@ -141,6 +142,7 @@
 				
 				util.http.normalReq.post('/USER-CLIENT/user', requestUser, 
 				(data) => {
+          console.log(data);
 					if(data.result){
 						util.cache.set('user', this.user);
 						this.back();

@@ -10,7 +10,7 @@
         "spec": "2.4.1",
         "type": "version"
       },
-      "F:\\pro\\bs"
+      "F:\\test\\bs"
     ]
   ],
   "_from": "cordova-plugin-statusbar@2.4.1",
@@ -45,7 +45,7 @@
   "_shasum": "222628a78aa54d34d4c927990020d0a3bace5545",
   "_shrinkwrap": null,
   "_spec": "cordova-plugin-statusbar@2.4.1",
-  "_where": "F:\\pro\\bs",
+  "_where": "F:\\test\\bs",
   "author": {
     "name": "Apache Software Foundation"
   },

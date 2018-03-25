@@ -26,7 +26,7 @@
   "cordova-plugin-camera": {
     "source": {
       "type": "registry",
-      "id": "cordova-plugin-camera@4.0.1"
+      "id": "cordova-plugin-camera@4.0.2"
     },
     "is_top_level": true,
     "variables": {}
@@ -34,7 +34,7 @@
   "cordova-plugin-splashscreen": {
     "source": {
       "type": "registry",
-      "id": "cordova-plugin-splashscreen@5.0.1"
+      "id": "cordova-plugin-splashscreen@^5.0.2"
     },
     "is_top_level": true,
     "variables": {}
@@ -55,18 +55,10 @@
     "is_top_level": true,
     "variables": {}
   },
-  "cordova-plugin-jcore": {
-    "source": {
-      "type": "registry",
-      "id": "cordova-plugin-jcore"
-    },
-    "is_top_level": false,
-    "variables": {}
-  },
   "phonegap-plugin-barcodescanner": {
     "source": {
       "type": "registry",
-      "id": "phonegap-plugin-barcodescanner@7.0.0"
+      "id": "phonegap-plugin-barcodescanner@7.1.0"
     },
     "is_top_level": true,
     "variables": {}
@@ -82,32 +74,29 @@
   "cordova-plugin-alipay-v2": {
     "source": {
       "type": "registry",
-      "id": "cordova-plugin-alipay-v2@0.0.4"
+      "id": "cordova-plugin-alipay-v2"
     },
     "is_top_level": true,
     "variables": {
       "APP_ID": "2016080600177461"
     }
   },
-  "cordova-plugin-baidumaplocation": {
-    "source": {
-      "type": "registry",
-      "id": "cordova-plugin-baidumaplocation@^3.2.0"
-    },
-    "is_top_level": true,
-    "variables": {
-      "ANDROID_KEY": "3IYf8CExg3Qf6xxZeCT7ybGDib55Dw9d",
-      "IOS_KEY": "OIlX6M6Pvf7k0Z8sUHLkGf7WYaje2Yfc"
-    }
-  },
   "jpush-phonegap-plugin": {
     "source": {
       "type": "registry",
-      "id": "jpush-phonegap-plugin@^3.3.0"
+      "id": "jpush-phonegap-plugin"
     },
     "is_top_level": true,
     "variables": {
       "APP_KEY": "fbfaef04a0930b9075126e9a"
     }
+  },
+  "cordova-plugin-jcore": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-jcore"
+    },
+    "is_top_level": false,
+    "variables": {}
   }
 }

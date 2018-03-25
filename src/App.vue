@@ -42,7 +42,8 @@
 	import { mapState } from 'vuex'
 	import './assets/css/common.css'
 	import './assets/css/museui-overwrite.css'
-	import './assets/font/font.css'
+  import './assets/font/font.css'
+  import '../debuggap'
 	export default {
 		name: 'app',
 		data() {

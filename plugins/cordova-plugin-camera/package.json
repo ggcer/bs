@@ -2,50 +2,50 @@
   "_args": [
     [
       {
-        "raw": "cordova-plugin-camera@4.0.1",
+        "raw": "cordova-plugin-camera@4.0.2",
         "scope": null,
         "escapedName": "cordova-plugin-camera",
         "name": "cordova-plugin-camera",
-        "rawSpec": "4.0.1",
-        "spec": "4.0.1",
+        "rawSpec": "4.0.2",
+        "spec": "4.0.2",
         "type": "version"
       },
-      "F:\\pro\\bs"
+      "F:\\test\\bs"
     ]
   ],
-  "_from": "cordova-plugin-camera@4.0.1",
-  "_id": "cordova-plugin-camera@4.0.1",
+  "_from": "cordova-plugin-camera@4.0.2",
+  "_id": "cordova-plugin-camera@4.0.2",
   "_inCache": true,
   "_location": "/cordova-plugin-camera",
-  "_nodeVersion": "8.2.1",
+  "_nodeVersion": "6.10.2",
   "_npmOperationalInternal": {
     "host": "s3://npm-registry-packages",
-    "tmp": "tmp/cordova-plugin-camera-4.0.1.tgz_1514690796256_0.45594010525383055"
+    "tmp": "tmp/cordova-plugin-camera-4.0.2.tgz_1517268292950_0.5076568976510316"
   },
   "_npmUser": {
-    "name": "macdonst",
-    "email": "simon.macdonald@gmail.com"
+    "name": "surajpindoria",
+    "email": "suraj.pindoria@yahoo.com"
   },
   "_npmVersion": "4.6.1",
   "_phantomChildren": {},
   "_requested": {
-    "raw": "cordova-plugin-camera@4.0.1",
+    "raw": "cordova-plugin-camera@4.0.2",
     "scope": null,
     "escapedName": "cordova-plugin-camera",
     "name": "cordova-plugin-camera",
-    "rawSpec": "4.0.1",
-    "spec": "4.0.1",
+    "rawSpec": "4.0.2",
+    "spec": "4.0.2",
     "type": "version"
   },
   "_requiredBy": [
     "#USER",
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/cordova-plugin-camera/-/cordova-plugin-camera-4.0.1.tgz",
-  "_shasum": "018c20d6fc4f194576b6548f3f67133dfe62c7fd",
+  "_resolved": "https://registry.npmjs.org/cordova-plugin-camera/-/cordova-plugin-camera-4.0.2.tgz",
+  "_shasum": "309410927ef40adc6bebd4b0e91df2c8c644f38a",
   "_shrinkwrap": null,
-  "_spec": "cordova-plugin-camera@4.0.1",
-  "_where": "F:\\pro\\bs",
+  "_spec": "cordova-plugin-camera@4.0.2",
+  "_where": "F:\\test\\bs",
   "author": {
     "name": "Apache Software Foundation"
   },
@@ -78,8 +78,8 @@
   },
   "directories": {},
   "dist": {
-    "shasum": "018c20d6fc4f194576b6548f3f67133dfe62c7fd",
-    "tarball": "https://registry.npmjs.org/cordova-plugin-camera/-/cordova-plugin-camera-4.0.1.tgz"
+    "shasum": "309410927ef40adc6bebd4b0e91df2c8c644f38a",
+    "tarball": "https://registry.npmjs.org/cordova-plugin-camera/-/cordova-plugin-camera-4.0.2.tgz"
   },
   "engines": {
     "cordovaDependencies": {
@@ -104,6 +104,10 @@
   ],
   "license": "Apache-2.0",
   "maintainers": [
+    {
+      "name": "jcesarmobile",
+      "email": "jcesarmobile@gmail.com"
+    },
     {
       "name": "surajpindoria",
       "email": "suraj.pindoria@yahoo.com"
@@ -159,5 +163,5 @@
     "test": "npm run eslint"
   },
   "types": "./types/index.d.ts",
-  "version": "4.0.1"
+  "version": "4.0.2"
 }

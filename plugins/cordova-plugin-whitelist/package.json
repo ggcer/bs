@@ -10,7 +10,7 @@
         "spec": ">=1.0.0 <2.0.0",
         "type": "range"
       },
-      "F:\\pro\\bs"
+      "F:\\test\\bs"
     ]
   ],
   "_from": "cordova-plugin-whitelist@>=1.0.0 <2.0.0",
@@ -45,7 +45,7 @@
   "_shasum": "b5e85ecdbbfe5aeded40a1bf4ee2372e67d96fb4",
   "_shrinkwrap": null,
   "_spec": "cordova-plugin-whitelist@1",
-  "_where": "F:\\pro\\bs",
+  "_where": "F:\\test\\bs",
   "author": {
     "name": "Apache Software Foundation"
   },
