@@ -105,6 +105,14 @@ module.exports = [
     "clobbers": [
       "JPush"
     ]
+  },
+  {
+    "id": "cordova-plugin-baidumaplocation.baidumap_location",
+    "file": "plugins/cordova-plugin-baidumaplocation/www/baidumap_location.js",
+    "pluginId": "cordova-plugin-baidumaplocation",
+    "clobbers": [
+      "baidumap_location"
+    ]
   }
 ];
 module.exports.metadata = 
@@ -121,7 +129,8 @@ module.exports.metadata =
   "ionic-plugin-keyboard": "2.2.1",
   "cordova-plugin-alipay-v2": "0.0.3",
   "cordova-plugin-jcore": "1.2.0",
-  "jpush-phonegap-plugin": "3.4.1"
+  "jpush-phonegap-plugin": "3.4.1",
+  "cordova-plugin-baidumaplocation": "3.2.0"
 };
 // BOTTOM OF METADATA
 });

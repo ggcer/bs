@@ -63,6 +63,10 @@
             {
               "xml": "<feature name=\"JPushPlugin\"><param name=\"ios-package\" value=\"JPushPlugin\" /></feature>",
               "count": 1
+            },
+            {
+              "xml": "<feature name=\"BaiduMapLocation\"><param name=\"ios-package\" value=\"BaiduMapLocation\" /></feature>",
+              "count": 1
             }
           ]
         }
@@ -78,6 +82,24 @@
           "CFBundleURLTypes": [
             {
               "xml": "<array><dict><key>CFBundleURLName</key><string>alipay</string><key>CFBundleURLSchemes</key><array><string>ali2016080600177461</string></array></dict></array>",
+              "count": 1
+            }
+          ],
+          "NSAppTransportSecurity": [
+            {
+              "xml": "<dict><key>NSAllowsArbitraryLoads</key><true /></dict>",
+              "count": 1
+            }
+          ],
+          "NSLocationWhenInUseUsageDescription": [
+            {
+              "xml": "<string>请点击'好'以允许访问。</string>",
+              "count": 1
+            }
+          ],
+          "BaiduMapLocation": [
+            {
+              "xml": "<dict><key>IOS_KEY</key><string>OIlX6M6Pvf7k0Z8sUHLkGf7WYaje2Yfc</string></dict>",
               "count": 1
             }
           ]
@@ -132,6 +154,12 @@
     },
     "jpush-phonegap-plugin": {
       "APP_KEY": "fbfaef04a0930b9075126e9a",
+      "PACKAGE_NAME": "io.cordova.hellocordova"
+    },
+    "cordova-plugin-baidumaplocation": {
+      "ANDROID_KEY": "3IYf8CExg3Qf6xxZeCT7ybGDib55Dw9d",
+      "IOS_KEY": "OIlX6M6Pvf7k0Z8sUHLkGf7WYaje2Yfc",
+      "IOS_LOCATION_DESC": "请点击'好'以允许访问。",
       "PACKAGE_NAME": "io.cordova.hellocordova"
     }
   },
@@ -242,6 +270,14 @@
       "clobbers": [
         "JPush"
       ]
+    },
+    {
+      "id": "cordova-plugin-baidumaplocation.baidumap_location",
+      "file": "plugins/cordova-plugin-baidumaplocation/www/baidumap_location.js",
+      "pluginId": "cordova-plugin-baidumaplocation",
+      "clobbers": [
+        "baidumap_location"
+      ]
     }
   ],
   "plugin_metadata": {
@@ -256,6 +292,7 @@
     "ionic-plugin-keyboard": "2.2.1",
     "cordova-plugin-alipay-v2": "0.0.3",
     "cordova-plugin-jcore": "1.2.0",
-    "jpush-phonegap-plugin": "3.4.1"
+    "jpush-phonegap-plugin": "3.4.1",
+    "cordova-plugin-baidumaplocation": "3.2.0"
   }
 }

@@ -37,6 +37,9 @@
     <feature name="JPushPlugin">
         <param name="android-package" value="cn.jiguang.cordova.push.JPushPlugin" />
     </feature>
+    <feature name="BaiduMapLocation">
+        <param name="android-package" value="com.aruistar.cordova.baidumap.BaiduMapLocation" />
+    </feature>
     <name>微校社团</name>
     <description>
         一个有内涵的校园社团app

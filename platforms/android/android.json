@@ -59,6 +59,10 @@
             {
               "xml": "<feature name=\"JPushPlugin\"><param name=\"android-package\" value=\"cn.jiguang.cordova.push.JPushPlugin\" /></feature>",
               "count": 1
+            },
+            {
+              "xml": "<feature name=\"BaiduMapLocation\"><param name=\"android-package\" value=\"com.aruistar.cordova.baidumap.BaiduMapLocation\" /></feature>",
+              "count": 1
             }
           ]
         }
@@ -133,6 +137,14 @@
             {
               "xml": "<meta-data android:name=\"JPUSH_APPKEY\" android:value=\"fbfaef04a0930b9075126e9a\" />",
               "count": 1
+            },
+            {
+              "xml": "<service android:enabled=\"true\" android:name=\"com.baidu.location.f\" android:process=\":remote\"><intent-filter><action android:name=\"com.baidu.location.service_v2.2\"></action></intent-filter></service>",
+              "count": 1
+            },
+            {
+              "xml": "<meta-data android:name=\"com.baidu.lbsapi.API_KEY\" android:value=\"3IYf8CExg3Qf6xxZeCT7ybGDib55Dw9d\" />",
+              "count": 1
             }
           ],
           "/manifest": [
@@ -204,22 +216,38 @@
           "/*": [
             {
               "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
-              "count": 2
+              "count": 3
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.INTERNET\" />",
-              "count": 1
+              "count": 2
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />",
-              "count": 1
+              "count": 2
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\" />",
-              "count": 1
+              "count": 2
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.READ_PHONE_STATE\" />",
+              "count": 2
+            },
+            {
+              "xml": "<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\" />",
+              "count": 1
+            },
+            {
+              "xml": "<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\" />",
+              "count": 1
+            },
+            {
+              "xml": "<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\" />",
+              "count": 1
+            },
+            {
+              "xml": "<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\" />",
               "count": 1
             }
           ],
@@ -271,6 +299,12 @@
     },
     "jpush-phonegap-plugin": {
       "APP_KEY": "fbfaef04a0930b9075126e9a",
+      "PACKAGE_NAME": "io.cordova.hellocordova"
+    },
+    "cordova-plugin-baidumaplocation": {
+      "ANDROID_KEY": "3IYf8CExg3Qf6xxZeCT7ybGDib55Dw9d",
+      "IOS_KEY": "OIlX6M6Pvf7k0Z8sUHLkGf7WYaje2Yfc",
+      "IOS_LOCATION_DESC": "请点击'好'以允许访问。",
       "PACKAGE_NAME": "io.cordova.hellocordova"
     }
   },
@@ -381,6 +415,14 @@
       "clobbers": [
         "JPush"
       ]
+    },
+    {
+      "id": "cordova-plugin-baidumaplocation.baidumap_location",
+      "file": "plugins/cordova-plugin-baidumaplocation/www/baidumap_location.js",
+      "pluginId": "cordova-plugin-baidumaplocation",
+      "clobbers": [
+        "baidumap_location"
+      ]
     }
   ],
   "plugin_metadata": {
@@ -395,6 +437,7 @@
     "ionic-plugin-keyboard": "2.2.1",
     "cordova-plugin-alipay-v2": "0.0.3",
     "cordova-plugin-jcore": "1.2.0",
-    "jpush-phonegap-plugin": "3.4.1"
+    "jpush-phonegap-plugin": "3.4.1",
+    "cordova-plugin-baidumaplocation": "3.2.0"
   }
 }

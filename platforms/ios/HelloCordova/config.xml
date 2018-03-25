@@ -85,4 +85,7 @@
     <feature name="JPushPlugin">
         <param name="ios-package" value="JPushPlugin" />
     </feature>
+    <feature name="BaiduMapLocation">
+        <param name="ios-package" value="BaiduMapLocation" />
+    </feature>
 </widget>

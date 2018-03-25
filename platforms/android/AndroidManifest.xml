@@ -75,6 +75,12 @@
         </receiver>
         <meta-data android:name="JPUSH_CHANNEL" android:value="developer-default" />
         <meta-data android:name="JPUSH_APPKEY" android:value="fbfaef04a0930b9075126e9a" />
+        <service android:enabled="true" android:name="com.baidu.location.f" android:process=":remote">
+            <intent-filter>
+                <action android:name="com.baidu.location.service_v2.2" />
+            </intent-filter>
+        </service>
+        <meta-data android:name="com.baidu.lbsapi.API_KEY" android:value="3IYf8CExg3Qf6xxZeCT7ybGDib55Dw9d" />
     </application>
     <uses-sdk android:minSdkVersion="16" android:targetSdkVersion="26" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -92,4 +98,7 @@
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
 </manifest>

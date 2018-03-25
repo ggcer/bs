@@ -64,6 +64,13 @@
 		670F90DE5B694CC78DA7F008 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24B4DF3131AB4FF79B103A4F /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		8163ED66BB384FC18D948298 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B146B91975D480A8519354A /* UserNotifications.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		35F246486CA340B5BB9AAE37 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A9D710016B924DBB9263F2BB /* libresolv.tbd */; settings = {ATTRIBUTES = (Weak, ); }; };
+		F38DAC7602D14290A1F8FC2B /* BaiduMapLocation.mm in Resources */ = {isa = PBXBuildFile; fileRef = 1A1C9733AE57496CA8D2FCDB /* BaiduMapLocation.mm */; };
+		FDA35FACA11B44ED949E0BB7 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9555FD1ED45D4947984A20A9 /* libcrypto.a */; };
+		B7893015EB1B4006A1D78FC1 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABF4B0198AA0413EA7030AF0 /* libssl.a */; };
+		1EF82AD49BC942D39563440A /* BaiduMapAPI_Base.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 722EDB5D46604F88B9E86626 /* BaiduMapAPI_Base.framework */; };
+		20819331785F4C1588EBB373 /* BaiduMapAPI_Location.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9370B17A46E34EECB35CE80F /* BaiduMapAPI_Location.framework */; };
+		F8E373B3BF244303A0E2CE6E /* BaiduMapAPI_Search.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 602EA06CCC394B3689C8CF30 /* BaiduMapAPI_Search.framework */; };
+		66C8DCAC95894E7A97BB829B /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1799D34749454AA5A69A3D6A /* libsqlite3.0.tbd */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -171,6 +178,14 @@
 		24B4DF3131AB4FF79B103A4F /* AdSupport.framework */ = {isa = PBXFileReference; name = "AdSupport.framework"; path = "System/Library/Frameworks/AdSupport.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
 		1B146B91975D480A8519354A /* UserNotifications.framework */ = {isa = PBXFileReference; name = "UserNotifications.framework"; path = "System/Library/Frameworks/UserNotifications.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
 		A9D710016B924DBB9263F2BB /* libresolv.tbd */ = {isa = PBXFileReference; name = "libresolv.tbd"; path = "usr/lib/libresolv.tbd"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = sourcecode.text-based-dylib-definition; explicitFileType = undefined; includeInIndex = 0; };
+		1A1C9733AE57496CA8D2FCDB /* BaiduMapLocation.mm */ = {isa = PBXFileReference; name = "BaiduMapLocation.mm"; path = "cordova-plugin-baidumaplocation/BaiduMapLocation.mm"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		9555FD1ED45D4947984A20A9 /* libcrypto.a */ = {isa = PBXFileReference; name = "libcrypto.a"; path = "HelloCordova/Plugins/cordova-plugin-baidumaplocation/libcrypto.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		ABF4B0198AA0413EA7030AF0 /* libssl.a */ = {isa = PBXFileReference; name = "libssl.a"; path = "HelloCordova/Plugins/cordova-plugin-baidumaplocation/libssl.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		BBF9395034F9426F9632F3E0 /* BaiduMapLocation.h */ = {isa = PBXFileReference; name = "BaiduMapLocation.h"; path = "cordova-plugin-baidumaplocation/BaiduMapLocation.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		722EDB5D46604F88B9E86626 /* BaiduMapAPI_Base.framework */ = {isa = PBXFileReference; name = "BaiduMapAPI_Base.framework"; path = "HelloCordova/Plugins/cordova-plugin-baidumaplocation/BaiduMapAPI_Base.framework"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		9370B17A46E34EECB35CE80F /* BaiduMapAPI_Location.framework */ = {isa = PBXFileReference; name = "BaiduMapAPI_Location.framework"; path = "HelloCordova/Plugins/cordova-plugin-baidumaplocation/BaiduMapAPI_Location.framework"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		602EA06CCC394B3689C8CF30 /* BaiduMapAPI_Search.framework */ = {isa = PBXFileReference; name = "BaiduMapAPI_Search.framework"; path = "HelloCordova/Plugins/cordova-plugin-baidumaplocation/BaiduMapAPI_Search.framework"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		1799D34749454AA5A69A3D6A /* libsqlite3.0.tbd */ = {isa = PBXFileReference; name = "libsqlite3.0.tbd"; path = "usr/lib/libsqlite3.0.tbd"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = sourcecode.text-based-dylib-definition; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,6 +219,12 @@
 				670F90DE5B694CC78DA7F008 /* AdSupport.framework in Frameworks */,
 				8163ED66BB384FC18D948298 /* UserNotifications.framework in Frameworks */,
 				35F246486CA340B5BB9AAE37 /* libresolv.tbd in Frameworks */,
+				FDA35FACA11B44ED949E0BB7 /* libcrypto.a in Frameworks */,
+				B7893015EB1B4006A1D78FC1 /* libssl.a in Frameworks */,
+				1EF82AD49BC942D39563440A /* BaiduMapAPI_Base.framework in Frameworks */,
+				20819331785F4C1588EBB373 /* BaiduMapAPI_Location.framework in Frameworks */,
+				F8E373B3BF244303A0E2CE6E /* BaiduMapAPI_Search.framework in Frameworks */,
+				66C8DCAC95894E7A97BB829B /* libsqlite3.0.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,6 +325,12 @@
 				24B4DF3131AB4FF79B103A4F /* AdSupport.framework */,
 				1B146B91975D480A8519354A /* UserNotifications.framework */,
 				A9D710016B924DBB9263F2BB /* libresolv.tbd */,
+				9555FD1ED45D4947984A20A9 /* libcrypto.a */,
+				ABF4B0198AA0413EA7030AF0 /* libssl.a */,
+				722EDB5D46604F88B9E86626 /* BaiduMapAPI_Base.framework */,
+				9370B17A46E34EECB35CE80F /* BaiduMapAPI_Location.framework */,
+				602EA06CCC394B3689C8CF30 /* BaiduMapAPI_Search.framework */,
+				1799D34749454AA5A69A3D6A /* libsqlite3.0.tbd */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -366,6 +393,8 @@
 				C7B61CF41318405F9929B032 /* JPushPlugin.h */,
 				35A5534A05E744C0B5FF202C /* AppDelegate+JPush.h */,
 				782CD9B46D6C43F5834CCC10 /* JPUSHService.h */,
+				1A1C9733AE57496CA8D2FCDB /* BaiduMapLocation.mm */,
+				BBF9395034F9426F9632F3E0 /* BaiduMapLocation.h */,
 			);
 			name = Plugins;
 			path = "HelloCordova/Plugins";
@@ -501,6 +530,7 @@
 				6E2CDE3FAFDF48B89C868EEC /* alipay.m in Sources */,
 				D4C17F34B70742D59309A1BD /* JPushPlugin.m in Sources */,
 				57A3A661E4794E17B6ABF44F /* AppDelegate+JPush.m in Sources */,
+				F38DAC7602D14290A1F8FC2B /* BaiduMapLocation.mm in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -539,11 +569,16 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"HelloCordova/Plugins/cordova-plugin-alipay-v2\"",
+					"\"HelloCordova/Plugins/cordova-plugin-baidumaplocation\"",
+					"\"HelloCordova/Plugins/cordova-plugin-baidumaplocation\"",
+					"\"HelloCordova/Plugins/cordova-plugin-baidumaplocation\"",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/HelloCordova/Plugins/cordova-plugin-jcore\"",
 					"\"$(SRCROOT)/HelloCordova/Plugins/jpush-phonegap-plugin\"",
+					"\"$(SRCROOT)/HelloCordova/Plugins/cordova-plugin-baidumaplocation\"",
+					"\"$(SRCROOT)/HelloCordova/Plugins/cordova-plugin-baidumaplocation\"",
 				);
 			};
 			name = Debug;
@@ -570,11 +605,16 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"HelloCordova/Plugins/cordova-plugin-alipay-v2\"",
+					"\"HelloCordova/Plugins/cordova-plugin-baidumaplocation\"",
+					"\"HelloCordova/Plugins/cordova-plugin-baidumaplocation\"",
+					"\"HelloCordova/Plugins/cordova-plugin-baidumaplocation\"",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/HelloCordova/Plugins/cordova-plugin-jcore\"",
 					"\"$(SRCROOT)/HelloCordova/Plugins/jpush-phonegap-plugin\"",
+					"\"$(SRCROOT)/HelloCordova/Plugins/cordova-plugin-baidumaplocation\"",
+					"\"$(SRCROOT)/HelloCordova/Plugins/cordova-plugin-baidumaplocation\"",
 				);
 			};
 			name = Release;

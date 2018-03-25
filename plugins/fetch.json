@@ -98,5 +98,16 @@
     },
     "is_top_level": false,
     "variables": {}
+  },
+  "cordova-plugin-baidumaplocation": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-baidumaplocation@3.2.0"
+    },
+    "is_top_level": true,
+    "variables": {
+      "ANDROID_KEY": "3IYf8CExg3Qf6xxZeCT7ybGDib55Dw9d",
+      "IOS_KEY": "OIlX6M6Pvf7k0Z8sUHLkGf7WYaje2Yfc"
+    }
   }
 }

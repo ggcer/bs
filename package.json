@@ -98,6 +98,11 @@
       "cordova-plugin-whitelist": {},
       "jpush-phonegap-plugin": {
         "APP_KEY": "fbfaef04a0930b9075126e9a"
+      },
+      "cordova-plugin-baidumaplocation": {
+        "ANDROID_KEY": "3IYf8CExg3Qf6xxZeCT7ybGDib55Dw9d",
+        "IOS_KEY": "OIlX6M6Pvf7k0Z8sUHLkGf7WYaje2Yfc",
+        "IOS_LOCATION_DESC": "请点击'好'以允许访问。"
       }
     },
     "platforms": [
