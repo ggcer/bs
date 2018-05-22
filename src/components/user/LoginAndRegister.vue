@@ -48,7 +48,7 @@
 						<mu-text-field v-model="registerObj.password" hintText="请输入您的密码" type="password" id="registerPassword"/><br/>
 						<mu-text-field v-model="registerObj.repassword" hintText="请确认您的密码" type="password" id="registerRepassword"/><br/>
 						<mu-select-field v-model="registerObj.type" hintText="请选择您的注册身份" id="registerType">
-							<mu-menu-item v-for="text,index in registerTypelist" :key="index" :value="index + 1" :title="text" />
+							<mu-menu-item :key="index" v-for="(text,index) in registerTypelist" :value="index + 1" :title="text" />
 						</mu-select-field><br/>
 						<div style="width: 100%; text-align: left; position: relative;">
 							<mu-text-field v-model="registerObj.smsCode" hintText="请输入手机验证码" style="width: 65%;" id="registerSmsCode"/>
@@ -153,7 +153,8 @@
 							$('#loginPassword .mu-text-field-input').get(0).focus();
 						});
 						return;
-					}
+          }
+          util.ui.showLoading('CENTER');
 					util.http.customReq.post('/authentication/form', this.passwordLoginObj, {
 						auth: {
 						    username: globalConfig.username,
@@ -189,8 +190,9 @@
 						});
 						return;
 					}
-					
-					//手机验证码登录
+          
+          //手机验证码登录
+          util.ui.showLoading('CENTER');
 					util.http.customReq.post('/authentication/mobile', this.mobileLoginObj, {
 						auth: {
 						    username: globalConfig.username,
@@ -274,7 +276,8 @@
 						$('#registerSmsCode .mu-text-field-input').get(0).focus();
 					});
 					return;
-				}
+        }
+        util.ui.showLoading('CENTER');
 				util.http.customReq.post('/register/user', registerObj, {
 					headers: {
 						'devicedId': this.devicedId,
@@ -314,6 +317,7 @@
 						}
 					}
 					util.ui.confirm(`我们将发送短信验证码到：${mobile}`, () => {
+            util.ui.showLoading('CENTER');
 						util.http.customReq.get('/code/sms', {
 							mobile: mobile
 						}, {
@@ -349,6 +353,7 @@
 						}
 					}
 					util.ui.confirm(`我们将发送短信验证码到：${mobile}`, () => {
+            util.ui.showLoading('CENTER');
 						util.http.customReq.get('/register/code', {
 							mobile: mobile
 						}, {

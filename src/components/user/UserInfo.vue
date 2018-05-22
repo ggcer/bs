@@ -105,6 +105,7 @@
 			this.user = util.cache.get('user');
 			let userBgImgCache = util.cache.get('userBgImg', true);
 			if(userBgImgCache){
+        util.ui.showLoading('CENTER');
 				util.http.normalReq.post('/USER-CLIENT/user', {
 					userId: this.user.userId,
 					userBgImg: userBgImgCache

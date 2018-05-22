@@ -47,6 +47,7 @@
 			let userHeadImgCache = util.cache.get('userHeadImg', true);
 			//是否有缓存的用户头像，如果有，代表用户新设置了头像
 			if(userHeadImgCache){
+        util.ui.showLoading('CENTER');
 				util.http.normalReq.post('/USER-CLIENT/user', {
 					userId: this.user.userId,
 					userHeadImg: userHeadImgCache

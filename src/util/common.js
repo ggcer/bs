@@ -71,26 +71,25 @@ const common = {
 	},
 	
 	//获得当前时间的字符串yyyy-mm-dd HH:mm:ss或yyyy-mm-dd
-	getCurrentDateStr(type){
-		let nowDateObj = new Date();
-		let year = nowDateObj.getFullYear();
-		let month = nowDateObj.getMonth() + 1;
+	formatDateObjToDateStr(dateObj, type){
+		let year = dateObj.getFullYear();
+		let month = dateObj.getMonth() + 1;
 		if(month < 10){
 			month = '0' + month;
 		}
-		let day = nowDateObj.getDate();
+		let day = dateObj.getDate();
 		if(day < 10){
 			day = '0' + day;
 		}
-		let hour = nowDateObj.getHours();
+		let hour = dateObj.getHours();
 		if(hour < 10){
 			hour = '0' + hour;
 		}
-		let minute = nowDateObj.getMinutes();
+		let minute = dateObj.getMinutes();
 		if(minute < 10){
 			minute = '0' + minute;
 		}
-		let second = nowDateObj.getSeconds();
+		let second = dateObj.getSeconds();
 		if(second < 10){
 			second = '0' + second;
 		}

@@ -56,7 +56,8 @@
 		name: 'userEdit',
 		data() {
 			return {
-				user: {},
+        user: {},
+        schoolList: [],
 				initUserHeadImg: require('../../assets/image/dlrb.jpg'),
 				
 				sexObj: {
@@ -130,7 +131,20 @@
 				this.user.userBirthday = util.common.formatDateStrToTimestamp(this.birthdayStr);
 				this.user.userProvince = this.addressStr.split('-')[0];
 				this.user.userCity = this.addressStr.split('-')[1];
-				this.user.userSchool = this.collegeStr;
+        this.user.userSchool = this.collegeStr;
+        //查询当前选中的学校后台支不支持
+        let isSchoolSupport = false;
+        this.schoolList.forEach((item, index) => {
+          if(item.schoolName == this.user.userSchool){
+            //将schoolName转换为schoolId进行请求
+            this.user.userSchool = item.schoolId;
+            isSchoolSupport = true;
+          }
+        })
+        if(!isSchoolSupport){
+          util.ui.alert(`本app暂未对 ${this.user.userSchool} 开放，请选择其他学校`);
+          return;
+        }
 				
         let requestUser = util.common.shallowCopyObj(this.user);
         console.log(requestUser);
@@ -139,11 +153,14 @@
 				requestUser.userBgImg = null;
 				//后台接收userBirthday的字段为userBirthdayVo
 				requestUser.userBirthdayVo = requestUser.userBirthday;
-				
+        
+        util.ui.showLoading('CENTER');
 				util.http.normalReq.post('/USER-CLIENT/user', requestUser, 
 				(data) => {
           console.log(data);
 					if(data.result){
+            //重新转换schoolId为schooleName
+            this.user.userSchool = this.collegeStr;
 						util.cache.set('user', this.user);
 						this.back();
 					}else{
@@ -193,6 +210,11 @@
 			//college选择器
 			this.collegePicker = util.ui.getCollegePicker(this.collegeObj);
 
+      util.ui.showLoading('CENTER');
+      util.http.normalReq.get('/USER-CLIENT/school', {}, (data) => {
+        this.schoolList = data.data;
+      }, (err) => {
+      });
 		}
 	}
 </script>

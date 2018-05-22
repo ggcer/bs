@@ -16,7 +16,7 @@
 					<mu-list>
 						<mu-sub-header>大家都在搜</mu-sub-header>
 						<div class="search-item-wrap">
-							<div class="search-item" v-for="(item, index) in searchSuggestList" @click="searchDesc = item.desc; search()">
+							<div class="search-item" :key="index" v-for="(item, index) in searchSuggestList" @click="searchDesc = item.desc; search()">
 								{{item.desc}}
 							</div>
 						</div>
@@ -36,7 +36,7 @@
 			<transition name="rightToLeft05">
 				<div id="search-result" class="search-result" v-if="isShowSearchResult">
 					<div class="org-full-item-wrap" v-show="nowActiveSearchResultHeaderItemIndex == 0">
-						<div class="org-full-item" v-for="(item, index) in searchResultList">
+						<div class="org-full-item" :key="index" v-for="(item, index) in searchResultList">
 							<img :src="item.imgSrc" />
 							<div class="org-full-item-right">
 								<h4>{{item.title}}</h4>
@@ -50,21 +50,21 @@
 					</div>
 				
 					<div class="org-full-item-wrap" v-show="nowActiveSearchResultHeaderItemIndex == 1">
-						<div class="org-full-item" v-for="(item, index) in searchResultList">
+						<div class="org-full-item" :key="index" v-for="(item, index) in searchResultList">
 							<img :src="item.imgSrc" />
 							<div></div>
 						</div>
 					</div>
 				
 					<div class="org-full-item-wrap" v-show="nowActiveSearchResultHeaderItemIndex == 2">
-						<div class="org-full-item" v-for="(item, index) in searchResultList">
+						<div class="org-full-item" :key="index" v-for="(item, index) in searchResultList">
 							<img :src="item.imgSrc" />
 							<div></div>
 						</div>
 					</div>
 				
 					<div class="org-full-item-wrap" v-show="nowActiveSearchResultHeaderItemIndex == 3">
-						<div class="org-full-item" v-for="(item, index) in searchResultList">
+						<div class="org-full-item" :key="index" v-for="(item, index) in searchResultList">
 							<img :src="item.imgSrc" />
 						</div>
 					</div>
@@ -81,7 +81,7 @@
 			
 			<transition name="fadeIn">
 				<div class="search-result-header" v-show="isShowSearchResult">
-					<div class="search-result-header-item" v-for="(item, index) in searchResultHeaderItem" 
+					<div class="search-result-header-item" :key="index" v-for="(item, index) in searchResultHeaderItem" 
 						@click="switchActiveSRHIAbled ? switchActiveSRHI(index) : ''">
 						{{item.desc}}
 						<div id="active-item-bottom-line" class="active-item-bottom-line" v-if="index == 0"></div>

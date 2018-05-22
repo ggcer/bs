@@ -15,7 +15,7 @@
 			</mu-list>
 			<mu-list>
 				<mu-sub-header>缓存信息</mu-sub-header>
-				<mu-list-item disableRipple @click="" title="应用缓存数据">
+				<mu-list-item disableRipple title="应用缓存数据">
 					<div slot="right">{{cacheSize}}</div>
 				</mu-list-item>
 			</mu-list>

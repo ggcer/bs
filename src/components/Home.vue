@@ -19,14 +19,8 @@
 				</div>
 			</div>
 			<swiper :options="swiperOption">
-				<swiper-slide>
-					<img src="../assets/image/other/demoTemp/zx.jpg" class="swiper-img" />
-				</swiper-slide>
-				<swiper-slide>
-					<img src="../assets/image/swiper/swiper2.jpg" class="swiper-img" />
-				</swiper-slide>
-				<swiper-slide>
-					<img src="../assets/image/swiper/swiper3.jpg" class="swiper-img" />
+				<swiper-slide :key="index" v-for="(item, index) in slidePicList">
+					<img :src="item.picurl" class="swiper-img" />
 				</swiper-slide>
 				<div class="swiper-pagination" slot="pagination"></div>
 			</swiper>
@@ -56,7 +50,7 @@
 					<img src="../assets/image/icon/refresh.png" v-show="!isOrgInRefresh" class="common-item-btn" id="refresh-org-btn" @click="refreshOrg">
 					<img src="../assets/image/icon/refresh_active.png" v-show="isOrgInRefresh" class="common-item-btn rotate360">
 				</h4>
-				<div class="common-item" v-for="(item, index) in activeOrgList">
+				<div class="common-item" :key="index" v-for="(item, index) in activeOrgList">
 					<img :src="item.orgImg" class="common-item-img">
 					<div class="common-item-tip">
 						<img src="../assets/image/icon/fire.png" class="common-item-tip-icon"> {{item.hotCount}}
@@ -69,7 +63,7 @@
 			
 			<div class="common-item-wrap">
 				<h4>热门活动</h4>
-				<div class="common-item" v-for="(item, index) in activeOrgList">
+				<div class="common-item" :key="index" v-for="(item, index) in activeOrgList">
 					<img :src="item.orgImg" class="common-item-img">
 					<div class="common-item-tip">
 						<img src="../assets/image/icon/fire.png" class="common-item-tip-icon"> {{item.hotCount}}
@@ -124,7 +118,8 @@
 				isHeadLoading: false,
 				isShowAppBar: true,
 				isOrgInRefresh: false,
-				nowTurn: null,
+        nowTurn: null,
+        slidePicList: [], //轮播图列表
 				runnerImgSrc: require('../assets/image/other/head-loading-runner.png'),
 				
 				activeOrgList: [{
@@ -236,28 +231,39 @@
 						this.go(path);
 					})
 				});
-			}
-		},
-		mounted() {
-			this.user = util.cache.get('user');
-			//如果为登陆页跳转过来则去获取用户详细信息
-			if(!this.user.userId){
-				//获取用户信息
-				util.http.normalReq.get('/USER-CLIENT/userdetail', {
+      },
+      initSlidePic(){
+        util.ui.showLoading('CENTER');
+        util.http.normalReq.get('/ACTIVITY-CLIENT/slidePic/list', {
 				}, (data) => {
-					if(data.result == true){
-						util.common.copyFieldValue(this.user, data.data);
-						util.cache.set('user', this.user);
-						
-						//在取到当前登陆用户信息后 将用户头像存入保存的用户登陆信息，用于退出登陆时回显
-						let rememberUserLoginMsg = util.cache.get('rememberUserLoginMsg');
-						rememberUserLoginMsg.userHeadImg = this.user.userHeadImg,
-						util.cache.set('rememberUserLoginMsg', rememberUserLoginMsg);
-						console.log('取得用户头像的用户登录信息：', rememberUserLoginMsg);
-					}
+          this.slidePicList = data.data;
 				}, (err) => {
 					
 				})
+      }
+		},
+		mounted() {
+      this.initSlidePic();
+			this.user = util.cache.get('user');
+			//如果为登陆页跳转过来则去获取用户详细信息
+			if(!this.user.userId){
+        //获取用户信息
+        util.ui.showLoading('CENTER');
+				// util.http.normalReq.get('/USER-CLIENT/userdetail', {
+				// }, (data) => {
+				// 	if(data.result == true){
+				// 		util.common.copyFieldValue(this.user, data.data);
+				// 		util.cache.set('user', this.user);
+						
+				// 		//在取到当前登陆用户信息后 将用户头像存入保存的用户登陆信息，用于退出登陆时回显
+				// 		let rememberUserLoginMsg = util.cache.get('rememberUserLoginMsg');
+				// 		rememberUserLoginMsg.userHeadImg = this.user.userHeadImg,
+				// 		util.cache.set('rememberUserLoginMsg', rememberUserLoginMsg);
+				// 		console.log('取得用户头像的用户登录信息：', rememberUserLoginMsg);
+				// 	}
+				// }, (err) => {
+					
+				// })
 			}
 			
 			$('#head-search').width($(window).width() - 130);

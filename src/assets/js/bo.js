@@ -32,7 +32,8 @@ const bo = {
 		isEnableBackgroundMode: false,	//是否开启后台模式
 		MASortField: 'RECENTLY_VIEWED',	//我的社团列表排序字段
 		MASortType:	'-',				//我的社团列表排序方式， '-'为降序，''为升序
-		isMAGrid: true,					//我的社团列表是否为网格展示		
+    isMAGrid: true,					//我的社团列表是否为网格展示
+    assViewRecord: [],    //社团浏览记录		
 	}
 }
 export default bo

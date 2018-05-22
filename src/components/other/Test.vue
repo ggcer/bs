@@ -62,6 +62,7 @@
     methods: {
       alipayDebug() {
         if (this.pay.payUser && this.pay.payAmount && this.pay.payInfo) {
+          util.ui.showLoading('CENTER');
           util.http.normalReq.post('/aliPay/order/sign', this.pay, (data) => {
             if(data.data){
               util.cordovaNative.callAlipay(data.data, (payResult) => {
@@ -84,6 +85,7 @@
       },
       aliWithdrawDebug() {
         if (this.withdraw.payeeAccount && this.withdraw.payAmount && this.withdraw.payInfo) {
+          util.ui.showLoading('CENTER');
           util.http.normalReq.post('/aliPay/trade/toaccount', this.withdraw, (data) => {
             util.ui.alert(data);
           }, (err) => {
@@ -93,6 +95,7 @@
         }
       },
       normalInterfaceTest() {
+        util.ui.showLoading('CENTER');
         util.http.normalReq.post('/me', {
 
         }, (data) => {

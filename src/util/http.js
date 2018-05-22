@@ -12,7 +12,7 @@ let normalAxios = axios.create({
 //一般axios请求拦截器[一般接口验证accessToken]
 normalAxios.interceptors.request.use(config => {
 	//显示加载模态层
-	util.ui.showLoading('CENTER');
+	// util.ui.showLoading('CENTER');
 	
 	console.log('一般请求成功发出--config：', config);
 	let accessToken = util.cache.get('user').accessToken;
@@ -100,7 +100,7 @@ function normalReqErrorHandler(error, succCb, failCb){
 					reConfig.headers.Authorization = `${user.tokenType} ${user.accessToken}`;
 					//显示加载模态层
 					console.log('二次请求成功发出--reConfig：', reConfig);
-					util.ui.showLoading('CENTER');
+					// util.ui.showLoading('CENTER');
 					axios.request(reConfig)
 					.then((res) => {
 						console.log('二次请求成功返回--data：', res.data);
@@ -161,7 +161,7 @@ let customAxios = (config) => {
 	//定制axios请求拦截器
 	returnCustomAxios.interceptors.request.use(config => {
 		//显示加载模态层
-		util.ui.showLoading('CENTER');
+		// util.ui.showLoading('CENTER');
 		
 		console.log('定制请求成功发出--config：', config);
 		return config;
@@ -242,7 +242,7 @@ let normalReq = {
 		})
 		.catch((err) => {
 			normalReqErrorHandler(err, succCb, failCb);
-		});
+    });
 	},
 	delete(requestUrl, params, succCb, failCb) {
 		return normalAxios.delete(process.env.API_HOST + requestUrl, params)
