@@ -232,8 +232,12 @@ function customReqErrorHandler(error, succCb, failCb){
 /*----------------------------------封装请求(请求地址, 请求参数, [成功回调(data)], [失败回调(err)])----------------------------------*/
 //一般接口请求
 let normalReq = {
-	post(requestUrl, params, succCb, failCb) {
-		return normalAxios.post(process.env.API_HOST + requestUrl, params)
+	post(requestUrl, params, succCb, failCb, selfIP) {
+    let ip = process.env.API_HOST;
+    if(selfIP){
+      ip = selfIP
+    }
+		return normalAxios.post(ip + requestUrl, params)
 		.then((res) => {
 			//res不存在表示手动取消请求，不需要进入成功回调
 			if(succCb && res){
@@ -244,8 +248,12 @@ let normalReq = {
 			normalReqErrorHandler(err, succCb, failCb);
     });
 	},
-	delete(requestUrl, params, succCb, failCb) {
-		return normalAxios.delete(process.env.API_HOST + requestUrl, params)
+	delete(requestUrl, params, succCb, failCb, selfIP) {
+    let ip = process.env.API_HOST;
+    if(selfIP){
+      ip = selfIP
+    }
+		return normalAxios.delete(ip + requestUrl, params)
 		.then((res) => {
 			//res不存在表示手动取消请求，不需要进入成功回调
 			if(succCb && res){
@@ -256,8 +264,12 @@ let normalReq = {
 			normalReqErrorHandler(err, succCb, failCb);
 		});
 	},
-	put(requestUrl, params, succCb, failCb) {
-		return normalAxios.put(process.env.API_HOST + requestUrl, params)
+	put(requestUrl, params, succCb, failCb, selfIP) {
+    let ip = process.env.API_HOST;
+    if(selfIP){
+      ip = selfIP
+    }
+		return normalAxios.put(ip + requestUrl, params)
 		.then((res) => {
 			//res不存在表示手动取消请求，不需要进入成功回调
 			if(succCb && res){
@@ -268,8 +280,12 @@ let normalReq = {
 			normalReqErrorHandler(err, succCb, failCb);
 		});
 	},
-	get(requestUrl, params, succCb, failCb) {
-		return normalAxios.get(process.env.API_HOST + requestUrl, {params: params})
+	get(requestUrl, params, succCb, failCb, selfIP) {
+    let ip = process.env.API_HOST;
+    if(selfIP){
+      ip = selfIP
+    }
+		return normalAxios.get(ip + requestUrl, {params: params})
 		.then((res) => {
 			//res不存在表示手动取消请求，不需要进入成功回调
 			if(succCb && res){
@@ -284,8 +300,12 @@ let normalReq = {
 
 //定制接口请求
 let customReq = {
-	post(requestUrl, params, config, succCb, failCb) {
-		return customAxios(config).post(process.env.API_HOST + requestUrl, params)
+	post(requestUrl, params, config, succCb, failCb, selfIP) {
+    let ip = process.env.API_HOST;
+    if(selfIP){
+      ip = selfIP
+    }
+		return customAxios(config).post(ip + requestUrl, params)
 		.then((res) => {
 			//res不存在表示手动取消请求，不需要进入成功回调
 			if(succCb && res){
@@ -296,8 +316,12 @@ let customReq = {
 			customReqErrorHandler(err, succCb, failCb);
 		});
 	},
-	delete(requestUrl, params, config, succCb, failCb) {
-		return customAxios(config).delete(process.env.API_HOST + requestUrl, params)
+	delete(requestUrl, params, config, succCb, failCb, selfIP) {
+    let ip = process.env.API_HOST;
+    if(selfIP){
+      ip = selfIP
+    }
+		return customAxios(config).delete(ip + requestUrl, params)
 		.then((res) => {
 			//res不存在表示手动取消请求，不需要进入成功回调
 			if(succCb && res){
@@ -308,8 +332,12 @@ let customReq = {
 			customReqErrorHandler(err, succCb, failCb);
 		});
 	},
-	put(requestUrl, params, config, succCb, failCb) {
-		return customAxios(config).put(process.env.API_HOST + requestUrl, params)
+	put(requestUrl, params, config, succCb, failCb, selfIP) {
+    let ip = process.env.API_HOST;
+    if(selfIP){
+      ip = selfIP
+    }
+		return customAxios(config).put(ip + requestUrl, params)
 		.then((res) => {
 			//res不存在表示手动取消请求，不需要进入成功回调
 			if(succCb && res){
@@ -320,8 +348,12 @@ let customReq = {
 			customReqErrorHandler(err, succCb, failCb);
 		});
 	},
-	get(requestUrl, params, config, succCb, failCb) {
-		return customAxios(config).get(process.env.API_HOST + requestUrl, {params: params})
+	get(requestUrl, params, config, succCb, failCb, selfIP) {
+    let ip = process.env.API_HOST;
+    if(selfIP){
+      ip = selfIP
+    }
+		return customAxios(config).get(ip + requestUrl, {params: params})
 		.then((res) => {
 			//res不存在表示手动取消请求，不需要进入成功回调
 			if(succCb && res){

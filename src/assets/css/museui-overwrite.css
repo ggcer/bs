@@ -79,6 +79,16 @@
 	text-overflow: ellipsis!important;
 }
 
+.mu-popup{
+  width: 100%!important;
+  z-index: 100!important;
+}
+.mu-overlay{
+  z-index: 99!important;
+}
+.mu-popup-left{
+  top: 40%!important;
+}
 
 /*----------------------------其他有关muse-ui的样式----------------------------*/
 

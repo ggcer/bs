@@ -19,7 +19,7 @@
 		<!-- loading框 -->
 		<!--遮罩层-->
 		<div id="loading-wrap" class="loading-wrap" v-show="loading.isShowCenterLoading"></div>
-		<mu-circular-progress :size="40" :strokeWidth="2" v-show="loading.isShowCenterLoading" />
+		<mu-circular-progress id="circular-propress" :size="40" :strokeWidth="2" v-show="loading.isShowCenterLoading" />
 		
 		<!--图片查看层-->
 		<transition name="fadeIn05">
@@ -43,7 +43,7 @@
 	import './assets/css/common.css'
 	import './assets/css/museui-overwrite.css'
   import './assets/font/font.css'
-  import '../debuggap'
+  // import '../debuggap'
 	export default {
 		name: 'app',
 		data() {

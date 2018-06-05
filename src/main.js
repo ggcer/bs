@@ -17,6 +17,10 @@ window.globalConfig = globalConfig;
 //使用MuseUI
 Vue.use(MuseUI)
 
+if(util.cache.get('ipStr')){
+  window.ipStr = util.cache.get('ipStr');
+}
+
 //自定义组件加载
 import appWrap from '@/components/global/appWrap'
 import appbar from '@/components/global/appBar'

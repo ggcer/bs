@@ -83,6 +83,12 @@ export default {
     refresh() {
       this.getMyAssList((data) => {
         this.myAssList = data.data;
+        //对创建时间重新赋值
+        this.myAssList.forEach((item, index) => {
+          item.assCreate = util.common.formatDateObjToDateStr(
+            new Date(item.assCreate)
+          );
+        });
         // 对myAssList塞入lastViewDate
         this.myAssList.forEach((item, index) => {
           this.user.assViewRecord.forEach((itemInner, indexInner) => {
@@ -123,7 +129,7 @@ export default {
         })
       }
       util.cache.set('user', this.user);
-      this.goWithParams("associationHome", assData);
+      this.goWithQuery("associationHome", assData);
     },
     //获取社团列表
     getMyAssList(cb) {
@@ -199,6 +205,7 @@ export default {
   },
   mounted() {
     this.user = util.cache.get("user");
+    util.ui.showLoading('CENTER');
     this.refresh();
   },
   destroyed() {

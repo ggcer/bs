@@ -20,12 +20,12 @@
 			</div>
 			<swiper :options="swiperOption">
 				<swiper-slide :key="index" v-for="(item, index) in slidePicList">
-					<img :src="item.picurl" class="swiper-img" />
+					<img :src="item.picurl" class="swiper-img" @click="goToWebView(item)"/>
 				</swiper-slide>
 				<div class="swiper-pagination" slot="pagination"></div>
 			</swiper>
 			<div class="common-menu-wrap">
-				<div class="common-menu">
+				<div class="common-menu" @click="go('/association/myAssociation')">
 					<img src="../assets/image/icon/homeItem/myself.png" class="common-menu-img"/>
 					<p class="common-menu-desc">我的</p>
 				</div>
@@ -81,7 +81,7 @@
 				<div class="user-content">
 					<img :src="user.userHeadImg ? user.userHeadImg : initUserHeadImg" class="user-avatar" />
 					<h4 v-html="user.userName ? user.userName : '无名大侠'"></h4>
-					<p v-html="user.userInfo ? user.userInfo : '这个人很懒，什么都没留下哦'"></p>
+					<p class="center" v-html="user.userInfo ? user.userInfo : '这个人很懒，什么都没留下哦'"></p>
 				</div>
 				<div :style="{backgroundImage: 'url(' + (user.userHeadImg ? user.userHeadImg : initUserHeadImg) + ')'}" class="user-wrap-bg"></div>
 			</div>
@@ -89,10 +89,16 @@
 				<mu-list-item title="我 的 社 团" @click="go('/association/myAssociation')">
 					<mu-icon slot="left" value="icon-team"/>
 				</mu-list-item>
-				<mu-list-item title="我 的 活 动">
+				<mu-list-item title="我 的 活 动" @click="go('/activity/myActivity')">
 					<mu-icon slot="left" value="icon-huodong" />
 				</mu-list-item>
+        <mu-list-item title="我 的 账 单" @click="go('/pay/payList')">
+					<mu-icon slot="left" value="icon-dingdan"/>
+				</mu-list-item>
 				<mu-list-item title="调 试" @click="go('/other/test')">
+					<mu-icon slot="left" value="icon-xiaoxitixing"/>
+				</mu-list-item>
+        <mu-list-item title="瑞 华" @click="go('/other/rh')">
 					<mu-icon slot="left" value="icon-xiaoxitixing"/>
 				</mu-list-item>
 			</mu-list>
@@ -179,7 +185,16 @@
 				setTimeout(() => {
 					this.isOrgInRefresh = false;
 				}, 800)
-			},
+      },
+      goToWebView(item){
+        this.goWithQuery('/other/webView', {
+          title: item.title,
+          url: item.hrefurl
+        });
+        // this.goWithQuery('/other/webView', {
+        //   url: item.hrefurl
+        // });
+      },
 			backToLogin() {
 				util.ui.confirm('是否退出登录', () => {
 					util.common.loginOut();
@@ -232,39 +247,42 @@
 					})
 				});
       },
-      initSlidePic(){
+      initSlidePic(succCb){
         util.ui.showLoading('CENTER');
         util.http.normalReq.get('/ACTIVITY-CLIENT/slidePic/list', {
 				}, (data) => {
           this.slidePicList = data.data;
+          succCb();
 				}, (err) => {
 					
 				})
       }
 		},
 		mounted() {
-      this.initSlidePic();
-			this.user = util.cache.get('user');
-			//如果为登陆页跳转过来则去获取用户详细信息
-			if(!this.user.userId){
-        //获取用户信息
-        util.ui.showLoading('CENTER');
-				// util.http.normalReq.get('/USER-CLIENT/userdetail', {
-				// }, (data) => {
-				// 	if(data.result == true){
-				// 		util.common.copyFieldValue(this.user, data.data);
-				// 		util.cache.set('user', this.user);
-						
-				// 		//在取到当前登陆用户信息后 将用户头像存入保存的用户登陆信息，用于退出登陆时回显
-				// 		let rememberUserLoginMsg = util.cache.get('rememberUserLoginMsg');
-				// 		rememberUserLoginMsg.userHeadImg = this.user.userHeadImg,
-				// 		util.cache.set('rememberUserLoginMsg', rememberUserLoginMsg);
-				// 		console.log('取得用户头像的用户登录信息：', rememberUserLoginMsg);
-				// 	}
-				// }, (err) => {
-					
-				// })
-			}
+      this.user = util.cache.get('user');
+      this.initSlidePic(() => {
+        //如果为登陆页跳转过来则去获取用户详细信息
+        if(!this.user.userId){
+          //获取用户信息
+          util.ui.showLoading('CENTER');
+          util.http.normalReq.get('/USER-CLIENT/userdetail', {
+          }, (data) => {
+            if(data.result == true){
+              util.common.copyFieldValue(this.user, data.data);
+              util.cache.set('user', this.user);
+              
+              //在取到当前登陆用户信息后 将用户头像存入保存的用户登陆信息，用于退出登陆时回显
+              let rememberUserLoginMsg = util.cache.get('rememberUserLoginMsg');
+              rememberUserLoginMsg.userHeadImg = this.user.userHeadImg,
+              util.cache.set('rememberUserLoginMsg', rememberUserLoginMsg);
+              console.log('取得用户头像的用户登录信息：', rememberUserLoginMsg);
+            }
+          }, (err) => {
+            
+          })
+        }
+      });
+			
 			
 			$('#head-search').width($(window).width() - 130);
 			$(window).resize(() => {
@@ -505,7 +523,8 @@
 		white-space: nowrap;
 		text-overflow: ellipsis;
 		overflow: hidden;
-		margin-top: 5px;
+    margin-top: 5px;
+    text-align: center;
 	}
 	
 	.user-content p {
@@ -519,7 +538,8 @@
 		-webkit-box-orient: vertical;
 		-webkit-line-clamp: 3;
 		text-overflow: ellipsis;
-		overflow: hidden;
+    overflow: hidden;
+    text-align: center;
 	}
 	
 	.shadow {

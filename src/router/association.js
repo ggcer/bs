@@ -14,4 +14,20 @@ export default [{
   component: (resovle) => { 
   	require.ensure([], () => resovle(require('@/components/association/AssociationHome')), 'associationHome')
   }
+},{
+  name: 'associationQrcode',
+  path: '/association/associationQrcode',
+  meta: {
+  },
+  component: (resovle) => { 
+  	require.ensure([], () => resovle(require('@/components/association/associationQrcode')), 'associationQrcode')
+  }
+},{
+  name: 'associationDetail',
+  path: '/association/associationDetail',
+  meta: {
+  },
+  component: (resovle) => { 
+  	require.ensure([], () => resovle(require('@/components/association/associationDetail')), 'associationDetail')
+  }
 }]

@@ -11,7 +11,7 @@
 			<div class="user-base-msg">
 				<img :src="user.userHeadImg ? user.userHeadImg : initUserHeadImg" class="user-avatar-img">
 				<h4 v-html="user.userName ? user.userName : '无名大侠'"></h4>
-				<p v-html="user.userInfo ? user.userInfo : '这个人很懒，什么都没留下哦'"></p>
+				<p class="center" v-html="user.userInfo ? user.userInfo : '这个人很懒，什么都没留下哦'"></p>
 			</div>
 			<mu-list>
 				<mu-list-item :title="userTypeStr">
@@ -289,7 +289,7 @@
 		text-overflow: ellipsis;
 		overflow: hidden;
 		color: #757575;
-		text-align: center;
+		text-align: center!important;
 	}
 	
 	.mu-sub-header {

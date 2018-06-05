@@ -4,6 +4,12 @@
 		<app-bar :title="isShowAppTitle ? associationName : ''" slot="appBar">
 			<mu-icon-button icon="icon-fanhui" slot="left" @click="back"/>
 		</app-bar>
+    <app-bar :title="isShowAppTitle ? associationName : ''" slot="appBar">
+			<mu-icon-button icon="icon-fanhui" slot="left" @click="back" />
+			
+      <mu-icon-button icon="icon-bianji" v-if="associationUser.assType == 1" slot="right" @click="goToAssociationDetail" />
+			<mu-icon-button icon="icon-erweima" slot="right" @click="goToAssociationQrcode" />
+		</app-bar>
 		
 		<app-content slot="appContent" :loadMoreMethod="nowActiveSearchAHHeaderItemIndex == 0 ? loadMoreActivity : null" :loadMoreDesc="nowActiveSearchAHHeaderItemIndex == 0 ? loadMoreDesc : ''">
 			<div class="association-bg-img" id="association-bg-img" :style="{backgroundImage: 'url(' + (association.assBg ? association.assBg : initAssBg) + ')'}"></div>
@@ -57,19 +63,12 @@
 					</div>
 				</div>
 
+        <!-- 社团印记 -->
         <div class="mark-wrap" v-show="nowActiveSearchAHHeaderItemIndex == 1">
           <mu-timeline>
             <mu-timeline-item>
-              <span slot="time">2018年 5月 1日</span>
-              <span slot="des">那是一个阳关明媚的下午，社团成立，带着社团成员们殷切的期盼</span>
-            </mu-timeline-item>
-            <mu-timeline-item>
-              <span slot="time">2018年 5月 3日</span>
-              <span slot="des">社团加入了第一位成员，社团长终于不再是光杆司令了</span>
-            </mu-timeline-item>
-            <mu-timeline-item>
-              <span slot="time">2018年 5月 5日</span>
-              <span slot="des">社团举办了第一次活动，意气风发</span>
+              <span slot="time" v-html="association.assCreate"></span>
+              <span slot="des">那是很有意义的一天，社团成立</span>
             </mu-timeline-item>
             <mu-timeline-item>
               <span slot="time">以后...</span>
@@ -158,6 +157,8 @@
 					<mu-raised-button label="发 送" class="write-comment-popup-send" :disabled="!writeCommentContent" primary @click="writeComment"/>
 				</div>
 			</transition>
+
+      <img src="../../assets/image/icon/pay-money.png" v-if="(associationUser.assType == 1 || associationUser.assType == 2) &&  associationUser.assCost == 2" @click="payAssMoney" class="pay-money">
 		</app-content>
 	</app-wrap>
 </template>
@@ -170,6 +171,7 @@ export default {
     return {
       isShowAppTitle: false, //是否显示app标题
       user: {}, //当前用户对象
+      associationUser: {},  //当前社团用户对象
       association: {}, //当前社团对象
       activityList: [], //社团活动列表
       commentItem: {}, //当前被评论的活动对象
@@ -225,33 +227,43 @@ export default {
     //刷新页面
     refresh() {
       console.log("我被刷新了");
+      util.ui.showLoading('CENTER');
       //获取社团详情
       util.http.normalReq.get(
         "/ACTIVITY-CLIENT/association/" + this.association.assId,
         {},
         data => {
           console.log("刷新结束");
+          //更新association对象
+          this.association.assMoney = data.data.associationDTO.assMoney;
+          // util.common.copyFieldValue(this.association, data.data.associationDTO);
+          this.associationUser = data.data.associationUser;
           //清除activityLiST
           this.activityList = [];
           this.activeReqObj.pageVo.pageNo = 0;
           //分页加载社团活动
-          this.loadMoreActivity();
-          //恢复社团名称
-          this.associationName = this.association.assName
-            ? this.association.assName
-            : "无名社团";
+          this.loadMoreActivity(() => {
+            //恢复社团名称
+            this.associationName = this.association.assName
+              ? this.association.assName
+              : "无名社团";
+          });
         },
         err => {}
       );
     },
     //加载更多社团活动
-    loadMoreActivity() {
+    loadMoreActivity(succCb) {
       //当前查询页数+1
       this.activeReqObj.pageVo.pageNo++;
+      util.ui.showLoading('CENTER');
       util.http.normalReq.post(
         "/ACTIVITY-CLIENT/activity/list",
         this.activeReqObj,
         data => {
+          if(succCb){
+            succCb();
+          }
           //将查询的数据赋值到activityList
           this.activityList = this.activityList.concat(data.data);
           //对时间重新赋值
@@ -351,6 +363,63 @@ export default {
         );
       }
     },
+    //交团费
+    payAssMoney(){
+      let reqObj = {
+        assId: this.association.assId,
+        moneyType: '2'
+      }
+      util.ui.showLoading('CENTER');
+      //查询该用户需缴纳的团费
+      util.http.normalReq.post(
+        "/assOrder/queryAssCost",
+        reqObj,
+        data => {
+          if(data.result){
+            console.log(JSON.stringify(data));
+            //获取缴费金额对象
+            let moneyObj = data.data;
+            util.ui.confirm(`尊敬的 ${this.association.assName} 团员，该社团发起了团费收集，共需缴纳 ${moneyObj.costMoney} 元，是否立即缴费`, () => {
+              let reqObj = {
+                payUser: this.user.userId,  //用户id
+                orderId: moneyObj.orderId,   //orderId
+                payAmount: moneyObj.costMoney + '', //缴费金额
+                payInfo: '社团日常团费',  //缴费说明
+              }
+              //调用支付
+              util.ui.showLoading('CENTER');
+              util.http.normalReq.post('/aliPay/order/sign', reqObj, (data) => {
+                if(data.data){
+                  util.cordovaNative.callAlipay(data.data, (payResult) => {
+                    if (payResult) {
+                      //用户取消不进入支付结果页面
+                      if (payResult.resultStatus != 6001) {
+                        this.goWithQuery('/pay/payResult', payResult);
+                      }
+                    }
+                  });
+                }else{
+                  util.ui.alert('不存在的data属性');
+                }
+              }, (err) => {
+
+              }, window.ipStr)
+            })
+          }else {
+            util.ui.toast(data.msg, 'WARN');
+          }
+        }, err => {
+
+        }, window.ipStr)
+    },
+    //跳转到社团详情
+    goToAssociationDetail(){
+      this.goWithQuery("associationDetail", this.association);
+    },
+    //跳转到社团qrcode
+    goToAssociationQrcode(){
+      this.goWithQuery("associationQrcode", this.association);
+    },
     hideCommentPopup() {
       $("#comment-popup").scrollTop(0);
       this.isShowCommentPopup = false;
@@ -371,18 +440,20 @@ export default {
         topicId: "1",
         content: this.writeCommentContent
       };
-      console.log(reqObj);
       util.http.normalReq.post(
         "/ACTIVITY-CLIENT/message/send",
         reqObj,
         data => {
+          //评论成功
           if (data.result) {
-            this.commentItem.commentList.unshift({
-              userName: this.user.userName,
-              userHeadImg: this.user.userHeadImg,
-              commentDate: util.common.formatDateObjToDateStr(new Date()),
-              commentContent: this.writeCommentContent
-            });
+            //当前活动评论数+1
+            this.commentItem.pinglunNum++;
+            //刷新该活动评论列表
+            this.commentLoadMoreHtml = "见底了，下拉加载更多";
+            this.commentItem.commentList = [];
+            this.commentReqObj.pageVo.pageNo = 0;
+            this.loadMoreComment();
+            //隐藏评论popup
             this.hideWriteCommentPopup();
           }
         }
@@ -404,14 +475,25 @@ export default {
     this.user = util.cache.get("user");
     //当前社团数据，从上一页获得
     this.association = this.getRouterDataObj();
-    //社团展示名称
-    this.associationName = this.association.assName
-      ? this.association.assName
-      : "无名社团";
-    // 社团id
-    this.activeReqObj.assId = this.association.assId;
-    // 调用刷新事件进行请求
-    this.refresh();
+    if(this.association.fromSearch){
+      this.associationName = this.association.assName;
+      this.activityList = this.association.activityList;
+    }else{
+      // 社团id
+      this.activeReqObj.assId = this.association.assId;
+      this.associationName =
+        "" +
+        '<div class="mu-circle-wrapper title-mu-circle-wrapper active" style="width: 20px; height: 20px; margin-top: 0">' +
+        '<div class="mu-circle-spinner active" style="border-color: white!important">' +
+        '<div class="mu-circle-clipper left"><div class="mu-circle" style="border-width: 1px;"></div></div>' +
+        '<div class="mu-circle-gap-patch"><div class="mu-circle"></div></div>' +
+        '<div class="mu-circle-clipper right"><div class="mu-circle" style="border-width: 1px;"></div></div>' +
+        "</div>" +
+        "</div>" +
+        "";
+      // 调用刷新事件进行请求
+      this.refresh();
+    }
 
     //下拉刷新事件注册
     let startY = 0;
@@ -781,5 +863,33 @@ export default {
   padding: 10px;
   font-size: 14px;
   background-color: #f4f4f4;
+}
+.mark-wrap{
+  padding: 20px;
+}
+.pay-money{
+  position: fixed;
+  bottom: 30px;
+  left: calc(50% - 15px);
+  width: 30px;
+  height: 30px;
+  animation: arrowDownAndUp 1.5s infinite linear;
+}
+@keyframes arrowDownAndUp{
+  0%{
+    transform:rotate(0deg);
+  }
+  25%{
+    transform:rotate(-15deg);
+  }
+  50%{
+    transform:rotate(0deg);
+  }
+  75%{
+    transform:rotate(15deg);
+  }
+  100%{
+    transform:rotate(0deg);
+  }
 }
 </style>

@@ -41,7 +41,7 @@
 		},
 		methods: {
 			goToPayResultDetail() {
-				this.goWithParams('payResultDetail', this.payResult);
+				this.goWithQuery('payResultDetail', this.payResult);
 			},
 			goBack() {
 				util.cache.remove('payResult');

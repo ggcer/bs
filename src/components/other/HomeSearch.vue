@@ -36,7 +36,7 @@
 			<transition name="rightToLeft05">
 				<div id="search-result" class="search-result" v-if="isShowSearchResult">
 					<div class="org-full-item-wrap" v-show="nowActiveSearchResultHeaderItemIndex == 0">
-						<div class="org-full-item" :key="index" v-for="(item, index) in searchResultList">
+						<div class="org-full-item" @click="goToAssociation(item)" :key="index" v-for="(item, index) in searchResultList">
 							<img :src="item.imgSrc" />
 							<div class="org-full-item-right">
 								<h4>{{item.title}}</h4>
@@ -116,18 +116,34 @@
 				},],
 				
 				searchSuggestList: [{
-					desc: '羽毛球社'
+					desc: '羽毛球'
 				},{
-					desc: '篮球社'
+					desc: '书法'
 				},{
 					desc: '跑协'
 				},{
-					desc: '跆拳道社'
+					desc: '跆拳道'
 				},{
 					desc: '尚武堂'
 				},{
-					desc: '辩协'
-				},],
+					desc: '辩论协会'
+        },],
+        resultList: [{
+          title: '羽毛球协会',
+          imgSrc: require('../../assets/image/other/demoTemp/ymq.jpg'),
+          desc: '渤海大学羽毛球协会欢迎广大渤大的学生加入本社，共同交流技术',
+          position: '辽宁 锦州 渤海大学'
+        },{
+          title: '辩论协会',
+          imgSrc: require('../../assets/image/other/demoTemp/blxh.jpg'),
+          desc: '舌战群儒，毫无畏惧',
+          position: '辽宁 锦州 渤海大学'
+        },{
+          title: '书法协会',
+          imgSrc: require('../../assets/image/other/demoTemp/sfxh.jpg'),
+          desc: '以文会友，活动地址渤海大学图书馆，报名请加微信群',
+          position: '辽宁 锦州 渤海大学'
+        }],
 				
 				searchResultList: [],
 				searchRecord: [],				
@@ -183,30 +199,61 @@
 					if(index != 0){
 						this.isNoRecord = true;
 					}else{
-						this.searchResultList =	[{
-							title: '羽毛球协会',
-							imgSrc: require('../../assets/image/swiper/swiper1.jpg'),
-							desc: '渤海大学羽毛球协会欢迎广大渤大的学生加入本社，共同交流技术，促进共同发展',
-							position: '辽宁 锦州 渤海大学'
-						},{
-							title: '辩论协会',
-							imgSrc: require('../../assets/image/swiper/swiper2.jpg'),
-							desc: '舌战群儒，毫无畏惧',
-							position: '辽宁 锦州 渤海大学'
-						},{
-							title: '书法协会',
-							imgSrc: require('../../assets/image/swiper/swiper3.jpg'),
-							desc: '以文会友，活动地址渤海大学图书馆，报名请加微信群',
-							position: '辽宁 锦州 渤海大学'
-						}]
-					}
+            this.resultList.forEach((item, index) => {
+              if(item.title.indexOf(this.searchDesc) != -1){
+                this.searchResultList.push(item);
+              }
+            })
+          }
+          if(this.searchResultList.length == 0){
+            this.isNoRecord = true;
+          }
 				}, 2000);
 			},
 			emptySearchRecord() {
 				util.ui.confirm('确定清空所有搜索记录吗', () => {
 					this.searchRecord = [];
 				})
-			}
+      },
+      goToAssociation(item){
+        let association = {
+          assName: null,
+          assHot: null,
+          assNum: null,
+          assInfo: null,
+          bgUrl: null,
+          logoUrl: null,
+          assCreate: null,
+          fromSearch: true,
+          activityList: []
+        }
+        if(item.title == '羽毛球协会'){
+          association.assName = '羽毛球协会';
+          association.assHot = 20;
+          association.assNum = 1290;
+          association.assHot = 51;
+          association.assCreate = '2018-04-21 19:41:12';
+          association.assInfo = '渤海大学羽毛球协会欢迎广大渤大的学生加入本社，共同交流技术';
+          association.assBg = require('../../assets/image/other/demoTemp/ymq.jpg');
+          association.assLogo = require('../../assets/image/other/demoTemp/ymqtx.jpg');
+          association.activityList = [{
+            content: '羽毛球协会期待你的加入',
+            dianZan: 4,
+            pinglunNum: 10,
+            createTime: '2018-05-11 18:41:21',
+            picImage: [
+              'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2318206942,1547797548&fm=27&gp=0.jpg',
+              'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3159630679,3753120671&fm=27&gp=0.jpg'
+            ]
+          }, {
+            content: '毕业季',
+            dianZan: 10,
+            pinglunNum: 2,
+            createTime: '2018-05-10 15:11:14'
+          }]
+        }
+        this.goWithQuery("/association/associationHome", association);
+      }
 		},
 		mounted() {
 			$('#app-wrap').off('scroll');

@@ -38,6 +38,14 @@
       </mu-list>
       <mu-raised-button label="支 付 宝 转 账 调 试" primary fullWidth @click="aliWithdrawDebug" /><br>
       <mu-raised-button label="登 录 后 普 通 接 口 调 试" primary fullWidth @click="normalInterfaceTest" />
+
+      <mu-list>
+        <mu-list-item class="input-item">
+          <div class="input-item-label">支付调试IP</div>
+          <input type="text" v-model="ip" class="input-item-input" placeholder="例如：192.168.1.108"/>
+          <mu-raised-button label="更改支付调试IP" primary @click="changeIP"/>
+        </mu-list-item>
+      </mu-list>
     </app-content>
   </app-wrap>
 </template>
@@ -49,14 +57,16 @@
       return {
         pay: {
           payUser: '123456',
+          orderId: '1000111',
           payAmount: null,
-          payInfo: null,
+          payInfo: null
         },
         withdraw: {
           payeeAccount: 'fmtqdo6505@sandbox.com',
           payAmount: null,
           payInfo: null
-        }
+        },
+        ip: null,
       }
     },
     methods: {
@@ -69,7 +79,7 @@
                 if (payResult) {
                   //用户取消不进入支付结果页面
                   if (payResult.resultStatus != 6001) {
-                    this.goWithParams('payResult', payResult);
+                    this.goWithQuery('/pay/payResult', payResult);
                   }
                 }
               });
@@ -78,7 +88,7 @@
             }
           }, (err) => {
 
-          })
+          }, window.ipStr)
         } else {
           util.ui.alert('请输入完整的支付信息');
         }
@@ -103,9 +113,20 @@
         }, (err) => {
 
         })
+      },
+      changeIP(){
+        let ipStr = `http://${this.ip}:8763/PAY-CLIENT`;
+        util.cache.set('ipStr', ipStr);
+        window.ipStr = ipStr;
+        this.ip = ipStr;
+        util.ui.alert("支付调试IP已设置为：" + ipStr);
       }
     },
-    mounted() {},
+    mounted() {
+      if(window.ipStr){
+        this.ip = window.ipStr;
+      }
+    },
     destroyed() {}
   }
 

@@ -22,17 +22,29 @@
   -webkit-font-smoothing: antialiased;
 }
 
+.icon-erweima:before { content: "\e65f"; }
+
 .icon-id:before { content: "\e67b"; }
 
 .icon-shezhi:before { content: "\e634"; }
 
+.icon-fanhui:before { content: "\e61f"; }
+
+.icon-shanchu:before { content: "\e625"; }
+
 .icon-zhanghuziliao:before { content: "\e6a8"; }
+
+.icon-caidan:before { content: "\e67f"; }
+
+.icon-dingdan:before { content: "\e64e"; }
 
 .icon-xuexiao:before { content: "\e606"; }
 
 .icon-ok:before { content: "\e668"; }
 
 .icon-xiaoxitixing:before { content: "\e673"; }
+
+.icon-team:before { content: "\e6e9"; }
 
 .icon-lajitong:before { content: "\e62b"; }
 
@@ -44,14 +56,6 @@
 
 .icon-shuaxin:before { content: "\e601"; }
 
-.icon-erweima:before { content: "\e65f"; }
+.icon-bianji:before { content: "\e603"; }
 
-.icon-fanhui:before { content: "\e61f"; }
-
-.icon-shanchu:before { content: "\e625"; }
-
-.icon-caidan:before { content: "\e67d"; }
-
-.icon-team:before { content: "\e6e9"; }
-
-.icon-bianji:before { content: "\e51c"; }
+.icon-xiangqingjieshao:before { content: "\e75b"; }
